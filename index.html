@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USA West Coast 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #F5F0E8;
+      --ink: #1A1A18;
+      --rust: #C5502A;
+      --sand: #D4C4A8;
+      --sky: #3A6EA5;
+      --muted: #6B6458;
+      --card: #FFFDF9;
+      --border: #E0D8CC;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem 1.5rem 3rem;
+      overflow: hidden;
+      background: var(--ink);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 30%, rgba(58,110,165,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(197,80,42,0.2) 0%, transparent 50%),
+        linear-gradient(160deg, #1A1A18 0%, #2C2820 50%, #1A1A18 100%);
+    }
+    .hero-texture {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-stamp {
+      position: absolute; top: 2rem; right: 1.5rem;
+      width: 80px; height: 80px;
+      border: 3px solid var(--rust); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; color: var(--rust);
+      font-family: 'DM Mono', monospace; font-size: 0.55rem;
+      letter-spacing: 0.05em; line-height: 1.3;
+      transform: rotate(12deg); opacity: 0.9;
+    }
+    .hero-label {
+      position: relative;
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      position: relative;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 14vw, 6rem);
+      font-weight: 900; line-height: 0.9;
+      color: var(--cream); margin-bottom: 1.5rem;
+    }
+    .hero-title span { color: var(--rust); }
+    .hero-meta {
+      position: relative;
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .hero-meta-item { display: flex; flex-direction: column; }
+    .hero-meta-item .lbl {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: #7A7065; margin-bottom: 0.15rem;
+    }
+    .hero-meta-item .val { font-size: 0.85rem; color: var(--sand); font-weight: 400; }
+    .hero-scroll {
+      position: relative; margin-top: 2.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      color: #6B6458; font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.15em;
+    }
+    .scroll-line {
+      width: 40px; height: 1px; background: var(--rust);
+      animation: sline 2s ease-in-out infinite;
+    }
+    @keyframes sline {
+      0%,100% { width:40px; opacity:1; }
+      50% { width:60px; opacity:0.5; }
+    }
+
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(245,240,232,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav-inner { display: flex; min-width: max-content; padding: 0 1rem; }
+    .nav-btn {
+      padding: 0.9rem 1rem; background: none; border: none;
+      border-bottom: 2px solid transparent;
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer; transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .nav-btn:hover { color: var(--ink); }
+    .nav-btn.active { color: var(--rust); border-bottom-color: var(--rust); }
+
+    /* SECTIONS */
+    .section { display: none; animation: fadeIn 0.3s ease; }
+    .section.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(8px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    /* OVERVIEW */
+    .ov-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border); border-top: 1px solid var(--border);
+    }
+    .ov-card {
+      background: var(--card); padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.25rem;
+    }
+    .ov-card.full { grid-column: 1/-1; }
+    .ov-card .oc-lbl {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
+    }
+    .ov-card .oc-val {
+      font-family: 'Playfair Display', serif; font-size: 1.35rem;
+      font-weight: 700; color: var(--ink); line-height: 1.2;
+    }
+    .ov-card .oc-sub { font-size: 0.75rem; color: var(--muted); }
+
+    .sec-title {
+      padding: 2rem 1.5rem 1rem;
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* FLIGHT CARD */
+    .flight-card {
+      background: var(--card); padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .flight-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .flight-num {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.1em; color: var(--rust);
+    }
+    .flight-date { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); }
+    .flight-route { display: flex; align-items: center; gap: 0.75rem; }
+    .fa { text-align: center; }
+    .fa .code {
+      font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; line-height: 1;
+    }
+    .fa .city { font-size: 0.62rem; color: var(--muted); }
+    .fa .time { font-size: 0.8rem; color: var(--ink); margin-top: 0.2rem; }
+    .fl { flex:1; display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
+    .fl .dur { font-family:'DM Mono',monospace; font-size:0.58rem; color:var(--muted); }
+    .fl .ln { width:100%; height:1px; background:var(--ink); position:relative; }
+    .fl .ln::after {
+      content:'▶'; position:absolute; right:-4px; top:50%;
+      transform:translateY(-50%); font-size:0.45rem;
+    }
+
+    /* ROUTE LIST */
+    .route-list { padding: 1.25rem 1.5rem; background: var(--card); border-bottom: 1px solid var(--border); }
+    .route-item {
+      display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.7rem;
+    }
+    .route-item:last-child { margin-bottom: 0; }
+    .ri-date {
+      font-family: 'DM Mono', monospace; font-size: 0.58rem;
+      color: var(--muted); width: 3.2rem; flex-shrink: 0;
+    }
+    .ri-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .ri-dot.rust { background: var(--rust); }
+    .ri-dot.sky { background: var(--sky); }
+    .ri-text { font-size: 0.85rem; }
+
+    /* DAY CARDS */
+    .day-card { border-bottom: 1px solid var(--border); overflow: hidden; }
+    .day-header {
+      display: flex; align-items: center; padding: 1.1rem 1.5rem;
+      cursor: pointer; background: var(--card);
+      user-select: none; -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s;
+    }
+    .day-header:active { background: var(--cream); }
+    .day-date-box {
+      width: 50px; height: 50px; border: 1.5px solid var(--ink);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      flex-shrink: 0; margin-right: 1rem;
+    }
+    .day-date-box .dm { font-family:'DM Mono',monospace; font-size:0.48rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--rust); }
+    .day-date-box .dn { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; line-height:1; }
+    .day-info { flex:1; }
+    .day-title { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; line-height:1.2; }
+    .day-sub { font-size:0.7rem; color:var(--muted); margin-top:0.15rem; }
+    .day-chev { color:var(--muted); font-size:0.7rem; transition:transform 0.3s; margin-left:0.75rem; }
+    .day-card.open .day-chev { transform:rotate(90deg); }
+    .day-body { display:none; padding:0 1.5rem 1.5rem; background:var(--cream); }
+    .day-card.open .day-body { display:block; }
+
+    /* TIMELINE */
+    .tl { position:relative; padding-top:1rem; }
+    .tl-item {
+      display:flex; gap:0.75rem; margin-bottom:1.1rem; position:relative;
+    }
+    .tl-item:not(:last-child)::before {
+      content:''; position:absolute;
+      left:2.2rem; top:1.4rem; bottom:-1.1rem;
+      width:1px; background:var(--border);
+    }
+    .tl-time {
+      width:2.2rem; padding-top:0.05rem;
+      font-family:'DM Mono',monospace; font-size:0.58rem;
+      color:var(--muted); text-align:right; flex-shrink:0;
+    }
+    .tl-dot { width:8px; height:8px; border-radius:50%; background:var(--rust); flex-shrink:0; margin-top:0.35rem; }
+    .tl-dot.sky { background:var(--sky); }
+    .tl-dot.gray { background:var(--sand); }
+    .tl-con { flex:1; }
+    .tl-name { font-weight:500; font-size:0.88rem; line-height:1.3; }
+    .tl-detail { font-size:0.72rem; color:var(--muted); margin-top:0.1rem; }
+    .tl-tag {
+      display:inline-block; margin-top:0.3rem; padding:0.12rem 0.45rem;
+      background:var(--cream); border:1px solid var(--border);
+      font-family:'DM Mono',monospace; font-size:0.52rem;
+      letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); border-radius:2px;
+    }
+    .tl-tag.food { border-color:var(--rust); color:var(--rust); }
+    .tl-tag.stay { border-color:var(--sky); color:var(--sky); }
+
+    /* FOOD OPTS */
+    .food-opts { display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:0.35rem; }
+    .food-opt { padding:0.2rem 0.55rem; border:1px solid var(--rust); font-size:0.7rem; color:var(--rust); border-radius:2px; }
+
+    /* PLACE CHIPS */
+    .places { margin-top:0.65rem; padding-top:0.65rem; border-top:1px dashed var(--border); }
+    .places-lbl {
+      font-family:'DM Mono',monospace; font-size:0.52rem; letter-spacing:0.15em;
+      text-transform:uppercase; color:var(--muted); margin-bottom:0.4rem;
+    }
+    .chips { display:flex; flex-wrap:wrap; gap:0.3rem; }
+    .chip {
+      padding:0.2rem 0.55rem; background:var(--card);
+      border:1px solid var(--border); font-size:0.68rem; color:var(--ink); border-radius:20px;
+    }
+
+    /* INFO BLOCK */
+    .info-blk {
+      background:var(--card); border:1px solid var(--border);
+      margin:1rem 1.5rem; padding:1.25rem;
+    }
+    .info-blk-title {
+      font-family:'DM Mono',monospace; font-size:0.6rem; letter-spacing:0.15em;
+      text-transform:uppercase; color:var(--rust); margin-bottom:0.75rem;
+    }
+    .ir { display:flex; gap:0.5rem; margin-bottom:0.45rem; font-size:0.8rem; }
+    .ir .k { color:var(--muted); min-width:68px; flex-shrink:0; font-family:'DM Mono',monospace; font-size:0.62rem; }
+    .ir .v { color:var(--ink); }
+
+    /* BUDGET */
+    .budget-wrap { margin:0 1.5rem 1.5rem; }
+    .budget-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:0.7rem 0; border-bottom:1px solid var(--border); font-size:0.82rem;
+    }
+    .budget-row:last-child { border-bottom:none; }
+    .budget-row .bl { color:var(--muted); font-size:0.78rem; }
+    .budget-row .ba { font-family:'DM Mono',monospace; font-size:0.78rem; }
+    .budget-row.tot { padding-top:1rem; border-top:2px solid var(--ink); }
+    .budget-row.tot .bl { font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:700; color:var(--ink); }
+    .budget-row.tot .ba { font-size:0.95rem; color:var(--rust); }
+
+    footer { padding:3rem 1.5rem; text-align:center; border-top:1px solid var(--border); }
+    footer .ft { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:900; margin-bottom:0.4rem; }
+    footer .fs { font-family:'DM Mono',monospace; font-size:0.58rem; letter-spacing:0.2em; color:var(--muted); }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-stamp">UNITED<br>STATES<br>2026<br>APR</div>
+  <p class="hero-label">Road Trip Itinerary</p>
+  <h1 class="hero-title">USA<br><span>West</span><br>Coast</h1>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="lbl">Departure</span>
+      <span class="val">Apr 2, 2026</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="lbl">Return</span>
+      <span class="val">Apr 17, 2026</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="lbl">Travelers</span>
+      <span class="val">5 People</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="lbl">Vehicle</span>
+      <span class="val">7-pax Minivan</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    SCROLL TO EXPLORE
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" data-tab="overview">Overview</button>
+    <button class="nav-btn" data-tab="days">Day by Day</button>
+    <button class="nav-btn" data-tab="stays">Stays &amp; Car</button>
+    <button class="nav-btn" data-tab="budget">Budget</button>
+  </div>
+</nav>
+
+<!-- OVERVIEW -->
+<div id="tab-overview" class="section active">
+  <div class="ov-grid">
+    <div class="ov-card full">
+      <span class="oc-lbl">Route</span>
+      <span class="oc-val">SF → Yosemite → LA → Seattle</span>
+      <span class="oc-sub">West Coast Loop · 15 Nights</span>
+    </div>
+    <div class="ov-card">
+      <span class="oc-lbl">Dates</span>
+      <span class="oc-val">Apr 2–17</span>
+      <span class="oc-sub">2026</span>
+    </div>
+    <div class="ov-card">
+      <span class="oc-lbl">Travelers</span>
+      <span class="oc-val">5 People</span>
+      <span class="oc-sub">Hsuanlin · Mingku · Hsingyen · Hsienhao · Muyun</span>
+    </div>
+    <div class="ov-card full">
+      <span class="oc-lbl">Rental Car</span>
+      <span class="oc-val">Chrysler Pacifica</span>
+      <span class="oc-sub">Alamo · 7-passenger · Automatic · SFO pick-up → SEA return</span>
+    </div>
+  </div>
+
+  <p class="sec-title">Flights</p>
+
+  <div class="flight-card">
+    <div class="flight-top">
+      <span class="flight-num">UA 872 · Outbound</span>
+      <span class="flight-date">Apr 2</span>
+    </div>
+    <div class="flight-route">
+      <div class="fa"><div class="code">TPE</div><div class="city">Taipei</div><div class="time">9:50 AM</div></div>
+      <div class="fl"><span class="dur">11h 40m</span><div class="ln"></div></div>
+      <div class="fa"><div class="code">SFO</div><div class="city">San Francisco</div><div class="time">6:30 AM</div></div>
+    </div>
+  </div>
+
+  <div class="flight-card">
+    <div class="flight-top">
+      <span class="flight-num">UA 737 · Connecting</span>
+      <span class="flight-date">Apr 15</span>
+    </div>
+    <div class="flight-route">
+      <div class="fa"><div class="code">SEA</div><div class="city">Seattle</div><div class="time">7:37 PM</div></div>
+      <div class="fl"><span class="dur">2h 13m</span><div class="ln"></div></div>
+      <div class="fa"><div class="code">SFO</div><div class="city">San Francisco</div><div class="time">9:50 PM</div></div>
+    </div>
+  </div>
+
+  <div class="flight-card">
+    <div class="flight-top">
+      <span class="flight-num">UA 853 · Return</span>
+      <span class="flight-date">Apr 15 → 17</span>
+    </div>
+    <div class="flight-route">
+      <div class="fa"><div class="code">SFO</div><div class="city">San Francisco</div><div class="time">11:20 PM</div></div>
+      <div class="fl"><span class="dur">13h 45m</span><div class="ln"></div></div>
+      <div class="fa"><div class="code">TPE</div><div class="city">Taipei</div><div class="time">4:05 AM</div></div>
+    </div>
+  </div>
+
+  <p class="sec-title">Route Overview</p>
+  <div class="route-list">
+    <div class="route-item"><span class="ri-date">4/2–4/4</span><span class="ri-dot rust"></span><span class="ri-text">San Francisco</span></div>
+    <div class="route-item"><span class="ri-date">4/4</span><span class="ri-dot rust"></span><span class="ri-text">San Jose → Livermore → Groveland</span></div>
+    <div class="route-item"><span class="ri-date">4/5–4/6</span><span class="ri-dot sky"></span><span class="ri-text">Yosemite National Park</span></div>
+    <div class="route-item"><span class="ri-date">4/7</span><span class="ri-dot rust"></span><span class="ri-text">Groveland → Fresno → Los Angeles</span></div>
+    <div class="route-item"><span class="ri-date">4/7–4/14</span><span class="ri-dot rust"></span><span class="ri-text">Los Angeles · Alhambra</span></div>
+    <div class="route-item"><span class="ri-date">4/15</span><span class="ri-dot rust"></span><span class="ri-text">LA → SEA → SFO → TPE</span></div>
+  </div>
+</div>
+
+<!-- DAYS -->
+<div id="tab-days" class="section">
+  <div id="dayList"></div>
+</div>
+
+<!-- STAYS -->
+<div id="tab-stays" class="section">
+  <p class="sec-title">Rental Car</p>
+  <div class="info-blk">
+    <div class="info-blk-title">Alamo · Chrysler Pacifica Minivan</div>
+    <div class="ir"><span class="k">Confirm</span><span class="v">1594262100</span></div>
+    <div class="ir"><span class="k">Pick up</span><span class="v">Apr 2 · 9:00 AM · SFO</span></div>
+    <div class="ir"><span class="k">Return</span><span class="v">Apr 15 · 6:00 PM · SEA</span></div>
+    <div class="ir"><span class="k">Vehicle</span><span class="v">Automatic · 7 seats · 5 bags</span></div>
+    <div class="ir"><span class="k">Add driver</span><span class="v">Muyun Weng (included)</span></div>
+    <div class="ir"><span class="k">Includes</span><span class="v">Damage Waiver · Liability Protection · Roadside+</span></div>
+    <div class="ir"><span class="k">Total</span><span class="v" style="color:var(--rust);font-weight:500;">TWD 65,312 (≈ USD $2,046)</span></div>
+  </div>
+
+  <p class="sec-title">Accommodations</p>
+
+  <div class="info-blk">
+    <div class="info-blk-title">San Francisco Airbnb · 4/2 – 4/4</div>
+    <div class="ir"><span class="k">Host</span><span class="v">Joyce Chan · 1-510-509-5348</span></div>
+    <div class="ir"><span class="k">Address</span><span class="v">1563 27th Ave, San Francisco, CA 94122</span></div>
+    <div class="ir"><span class="k">Type</span><span class="v">2 bed / 2 bath · 8 guests · Golden Gate Park area</span></div>
+    <div class="ir"><span class="k">Rating</span><span class="v">★ 4.98 · 173 reviews</span></div>
+    <div class="ir"><span class="k">Check-in</span><span class="v">15:00（可 11:10 先放行李）</span></div>
+    <div class="ir"><span class="k">Parking</span><span class="v">Free</span></div>
+  </div>
+
+  <div class="info-blk">
+    <div class="info-blk-title">Groveland Airbnb · 4/4 – 4/7</div>
+    <div class="ir"><span class="k">Address</span><span class="v">19228 Pine Mountain Dr, Groveland, CA 95321</span></div>
+    <div class="ir"><span class="k">Type</span><span class="v">2 bed / 2 bath · Near Pine Mountain Lake</span></div>
+    <div class="ir"><span class="k">Rating</span><span class="v">★ 4.98 · 223 reviews</span></div>
+    <div class="ir"><span class="k">Check-in</span><span class="v">16:00 on Apr 4</span></div>
+    <div class="ir"><span class="k">Check-out</span><span class="v">11:00 on Apr 7</span></div>
+    <div class="ir"><span class="k">Market</span><span class="v">Mar-Val Market · 7 min away</span></div>
+    <div class="ir"><span class="k">Note</span><span class="v">Pine Mountain Lake Gate: $50 first entry only</span></div>
+  </div>
+
+  <div class="info-blk">
+    <div class="info-blk-title">Los Angeles Airbnb · 4/7 – 4/14</div>
+    <div class="ir"><span class="k">Address</span><span class="v">1126 South Cordova St, Alhambra, CA 91801</span></div>
+    <div class="ir"><span class="k">Type</span><span class="v">3 bed / 2 bath · 8 guests · Near So. Pasadena</span></div>
+    <div class="ir"><span class="k">Rating</span><span class="v">★ 4.91 · 159 reviews</span></div>
+  </div>
+</div>
+
+<!-- BUDGET -->
+<div id="tab-budget" class="section">
+  <p class="sec-title">Expense Breakdown</p>
+  <div class="budget-wrap">
+    <div class="budget-row"><span class="bl">✈️ Flights (5 pax)</span><span class="ba">NT$ 110,435</span></div>
+    <div class="budget-row"><span class="bl">🚗 Rental Car (Alamo)</span><span class="ba">NT$ 65,312</span></div>
+    <div class="budget-row"><span class="bl">🏠 SF Airbnb (4/2–4/4)</span><span class="ba">NT$ 23,440</span></div>
+    <div class="budget-row"><span class="bl">🌲 Groveland Airbnb (4/4–4/7)</span><span class="ba">NT$ 24,294</span></div>
+    <div class="budget-row"><span class="bl">🌆 LA Airbnb (4/7–4/14)</span><span class="ba">NT$ 26,564</span></div>
+    <div class="budget-row"><span class="bl">⚾ Baseball Tickets</span><span class="ba">NT$ 21,362</span></div>
+    <div class="budget-row"><span class="bl">🎡 Universal Studios</span><span class="ba">TBD</span></div>
+    <div class="budget-row"><span class="bl">🔬 CA Academy of Sciences (NightLife)</span><span class="ba">TBD</span></div>
+    <div class="budget-row"><span class="bl">🏝️ Alcatraz Night Tour</span><span class="ba">$59.65/人</span></div>
+    <div class="budget-row"><span class="bl">🌿 Yosemite Entry</span><span class="ba">TBD</span></div>
+    <div class="budget-row"><span class="bl">📋 ESTA &amp; Travel Insurance</span><span class="ba">TBD</span></div>
+    <div class="budget-row tot"><span class="bl">Confirmed Total</span><span class="ba">NT$ 271,407+</span></div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft">USA West Coast</div>
+  <div class="fs">APR 2 – APR 17 · 2026 · UNITED AIRLINES</div>
+</footer>
+
+<script>
+// Tab switching
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  });
+});
+
+const days = [
+  {
+    num:'2', sub:'San Francisco Arrival',
+    desc:'SFO → Golden Gate Area',
+    tl:[
+      {t:'6:30', dot:'rust', n:'Arrive SFO (UA 872)', d:'San Francisco International Airport'},
+      {t:'9:00', dot:'rust', n:'Alamo Car Pickup', d:'SFO Rental Counter', tag:'Car'},
+      {t:'', dot:'gray', n:'Brunch', d:null, tag:'Food', food:['A. In-N-Out Burger','B. Taqueria San Bruno']},
+      {t:'11:10', dot:'sky', n:'Drop luggage at Airbnb', d:'1563 27th Ave · Golden Gate Park area', tag:'Stay'},
+      {t:'', dot:'gray', n:'Afternoon Sightseeing', d:null, places:['Warming Hut Park Store','Golden Gate Bridge','Palace of Fine Arts','Baker Beach']},
+      {t:'15:00', dot:'sky', n:'Airbnb Check-in', d:'Joyce Chan · 1563 27th Ave', tag:'Stay'},
+      {t:'18:00', dot:'rust', n:'CA Academy of Sciences NightLife', d:'週四限定！ 18:00–22:00', tag:'Activity'},
+      {t:'', dot:'gray', n:'Dinner', d:'自煮 · 買菜：Safeway 或 22nd & Irving Market', tag:'Food'},
+    ]
+  },
+  {
+    num:'3', sub:"San Francisco Day 2",
+    desc:"Fisherman's Wharf · Cable Car · Union Square",
+    tl:[
+      {t:'', dot:'rust', n:'Lombard Street', d:'The crookedest street'},
+      {t:'', dot:'rust', n:"Fisherman's Wharf", d:'Parking ~$10/h'},
+      {t:'', dot:'rust', n:'Pier 39', d:'Sea lions & shops'},
+      {t:'', dot:'rust', n:'Boudin Bakery', d:'Clam Chowder bread bowl'},
+      {t:'', dot:'gray', n:'Lunch', tag:'Food', food:["A. Sotto Mare（電話預約）","B. Golden Boy Pizza（外帶）"]},
+      {t:'', dot:'rust', n:'Union Square Garage', d:'$6/h · max $40'},
+      {t:'', dot:'rust', n:'Cable Car', d:'Powell St turnaround · $8/person'},
+      {t:'', dot:'rust', n:'Nintendo San Francisco', d:'Union Square'},
+      {t:'', dot:'rust', n:'Biscoff Coffee Corner', d:'California St & Powell St Viewpoint'},
+      {t:'', dot:'rust', n:'Ghirardelli Chocolate', d:'Classic SF souvenir stop'},
+      {t:'', dot:'gray', n:'Painted Ladies', d:'Postcard Row'},
+      {t:'18:00', dot:'rust', n:'Alcatraz Night Tour', d:'$59.65/人 · Ferry: 17:55 / 18:30 / 19:05', tag:'Activity'},
+      {t:'', dot:'gray', n:'Dinner', d:'自煮', tag:'Food'},
+    ]
+  },
+  {
+    num:'4', sub:'Tech Tour → Groveland',
+    desc:'San Jose · Livermore · Groveland',
+    tl:[
+      {t:'9:00', dot:'rust', n:'Google Visitor Experience', d:'Mountain View', tag:'Activity'},
+      {t:'10:00', dot:'rust', n:'Apple Park Visitor Center', d:'Vision Pro 體驗預約', tag:'Activity'},
+      {t:'', dot:'gray', n:'Lunch', tag:'Food', food:['A. PHỞ HÀ NỘI SAN JOSE','B. 美國飯']},
+      {t:'', dot:'rust', n:'San Francisco Premium Outlets', d:'Livermore · Shopping'},
+      {t:'', dot:'rust', n:'Drive to Groveland', d:'~2h 3min'},
+      {t:'16:00', dot:'sky', n:'Groveland Airbnb Check-in', d:'19228 Pine Mountain Dr', tag:'Stay'},
+      {t:'', dot:'gray', n:'Note', d:'Pine Mountain Lake Gate: $50 first entry · enter from gate only afterward'},
+    ]
+  },
+  {
+    num:'5', sub:'Yosemite Day 1',
+    desc:'Groveland → Yosemite Valley',
+    tl:[
+      {t:'', dot:'rust', n:'Lower Yosemite Falls Trail', d:'~1 hr hike', tag:'Hike'},
+      {t:'', dot:'gray', n:'Yosemite Valley Chapel', d:'Historic chapel'},
+      {t:'', dot:'gray', n:"Cook's Meadow Loop", d:'Views of Half Dome & Yosemite Falls'},
+      {t:'', dot:'rust', n:'El Capitan Picnic Area', d:'野餐', tag:'Food'},
+      {t:'', dot:'rust', n:'Bridalveil Fall', d:'~40 min'},
+      {t:'', dot:'rust', n:'Tunnel View', d:'傍晚日落 · Iconic valley panorama'},
+    ]
+  },
+  {
+    num:'6', sub:'Yosemite Day 2',
+    desc:'Mist Trail · Half Dome · Mirror Lake',
+    tl:[
+      {t:'', dot:'rust', n:'Mist Trail + John Muir Trail', d:'Vernal Fall + Nevada Fall · ~6 hrs', tag:'Hike'},
+      {t:'', dot:'gray', n:'Shuttle Bus', d:'Use Yosemite Valley shuttle system'},
+      {t:'', dot:'gray', n:'Lunch/Dinner', tag:'Food', food:['Curry Village Pizza Deck']},
+      {t:'', dot:'rust', n:'Half Dome Viewpoint', d:'Via shuttle'},
+      {t:'', dot:'rust', n:'Stoneman Meadow', d:'Open meadow views'},
+      {t:'', dot:'rust', n:'Mirror Lake', d:'Reflection of Half Dome'},
+    ]
+  },
+  {
+    num:'7', sub:'Groveland → Los Angeles',
+    desc:'~6 hr drive via Fresno & Bakersfield',
+    tl:[
+      {t:'', dot:'rust', n:'Pine Mountain Lake', d:'Morning visit'},
+      {t:'11:00', dot:'sky', n:'Groveland Airbnb Check-out', tag:'Stay'},
+      {t:'', dot:'rust', n:'Drive to Fresno', d:'~2h 18min'},
+      {t:'', dot:'gray', n:'Lunch (Fresno)', tag:'Food', food:['TBD']},
+      {t:'', dot:'rust', n:'Bakersfield', d:'~1h 34min · rest stop'},
+      {t:'', dot:'gray', n:'Dinner', tag:'Food', food:['TBD']},
+      {t:'', dot:'sky', n:'LA Alhambra Airbnb Arrive', d:'1126 South Cordova St, Alhambra CA', tag:'Stay'},
+    ]
+  },
+  {
+    num:'8–11', sub:'Los Angeles',
+    desc:'Alhambra base · TBD activities',
+    tl:[
+      {t:'', dot:'sky', n:'LA Alhambra Airbnb', d:'1126 South Cordova St', tag:'Stay'},
+      {t:'', dot:'gray', n:'Activities', d:'Universal Studios · Hollywood · Beaches · More · TBD'},
+      {t:'', dot:'gray', n:'American Chain Food', tag:'Food', food:["In-N-Out","Raising Cane's","Chick-fil-A","Five Guys","Jollibee","Panda Express","Texas Roadhouse","Chipotle","Carl's Jr.","Wendy's"]},
+    ]
+  },
+  {
+    num:'15', sub:'Departure Day',
+    desc:'LA → Seattle → SFO → Taipei',
+    tl:[
+      {t:'18:00', dot:'rust', n:'Return Rental Car at SEA', d:'SEA-TAC Airport · Alamo'},
+      {t:'19:37', dot:'rust', n:'UA 737 Departs SEA', d:'Seattle → San Francisco · arrives 9:50 PM'},
+      {t:'23:20', dot:'rust', n:'UA 853 Departs SFO', d:'San Francisco → Taipei · 13h 45m'},
+    ]
+  },
+];
+
+const dayList = document.getElementById('dayList');
+days.forEach(day => {
+  const card = document.createElement('div');
+  card.className = 'day-card';
+
+  let body = '<div class="tl">';
+  day.tl.forEach(item => {
+    const dotCls = item.dot === 'sky' ? 'sky' : item.dot === 'gray' ? 'gray' : '';
+    body += `<div class="tl-item">
+      <div class="tl-time">${item.t||''}</div>
+      <div class="tl-dot ${dotCls}"></div>
+      <div class="tl-con">
+        <div class="tl-name">${item.n}</div>`;
+    if (item.d) body += `<div class="tl-detail">${item.d}</div>`;
+    if (item.tag) {
+      const tc = item.tag==='Food'?'food':item.tag==='Stay'?'stay':'';
+      body += `<span class="tl-tag ${tc}">${item.tag}</span>`;
+    }
+    if (item.food) {
+      body += `<div class="food-opts">`;
+      item.food.forEach(f => body += `<span class="food-opt">${f}</span>`);
+      body += `</div>`;
+    }
+    if (item.places) {
+      body += `<div class="places"><div class="places-lbl">📍 Spots</div><div class="chips">`;
+      item.places.forEach(p => body += `<span class="chip">${p}</span>`);
+      body += `</div></div>`;
+    }
+    body += `</div></div>`;
+  });
+  body += '</div>';
+
+  card.innerHTML = `
+    <div class="day-header">
+      <div class="day-date-box">
+        <div class="dm">APR</div>
+        <div class="dn">${day.num}</div>
+      </div>
+      <div class="day-info">
+        <div class="day-title">${day.sub}</div>
+        <div class="day-sub">${day.desc}</div>
+      </div>
+      <div class="day-chev">▶</div>
+    </div>
+    <div class="day-body">${body}</div>`;
+
+  card.querySelector('.day-header').addEventListener('click', () => card.classList.toggle('open'));
+  dayList.appendChild(card);
+});
+</script>
+</body>
+</html>

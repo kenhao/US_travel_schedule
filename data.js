@@ -93,7 +93,7 @@ const days = [
     sub: '舊金山 Day 2',
     desc: "Fisherman's Wharf · Cable Car · Union Square",
     cover: {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Fishermans_wharf_sf.jpg/1200px-Fishermans_wharf_sf.jpg',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Fisherman%27s_Wharf_San_Francisco_January_2013_002.jpg',
       caption: "Fisherman's Wharf · San Francisco",
     },
     tl: [
@@ -109,7 +109,7 @@ const days = [
         n: "Fisherman's Wharf",
         d: '停車約 $10/h',
         mapUrl: 'https://maps.google.com/?q=Fishermans+Wharf+San+Francisco',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Fishermans_wharf_sf.jpg/600px-Fishermans_wharf_sf.jpg', caption: "Fisherman's Wharf" },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Fisherman%27s_Wharf_San_Francisco_January_2013_002.jpg', caption: "Fisherman's Wharf" },
       },
       {
         t: '', dot: 'rust',

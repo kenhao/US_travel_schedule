@@ -28,11 +28,12 @@ function lazyImg(src, className, caption) {
   const img = document.createElement('img');
   img.className = className;
   img.alt = caption || '';
-  img.loading = 'lazy';
   img.onload = () => img.classList.add('loaded');
   img.onerror = () => img.style.display = 'none';
   img.onclick = () => openLightbox(src, caption);
-  img.src = src;
+  // Store src for deferred loading — images live inside display:none containers
+  // and browser lazy loading won't trigger for them reliably.
+  img.dataset.lazySrc = src;
   return img;
 }
 
@@ -344,8 +345,13 @@ days.forEach((day, idx) => {
   card.querySelector('.day-header').addEventListener('click', () => {
     const wasOpen = card.classList.contains('open');
     card.classList.toggle('open');
-    if (!wasOpen && day.yosDay) {
-      setTimeout(() => yosAnimate(mapId, day.yosDay), 120);
+    if (!wasOpen) {
+      // Load deferred images now that the card is visible
+      card.querySelectorAll('img[data-lazy-src]').forEach((img) => {
+        img.src = img.dataset.lazySrc;
+        img.removeAttribute('data-lazy-src');
+      });
+      if (day.yosDay) setTimeout(() => yosAnimate(mapId, day.yosDay), 120);
     }
   });
 

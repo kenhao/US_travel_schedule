@@ -1,2364 +1,402 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-TW">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>USA West Coast 2026</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --cream: #f5f0e8;
-        --ink: #1a1a18;
-        --rust: #c5502a;
-        --sand: #d4c4a8;
-        --sky: #3a6ea5;
-        --muted: #6b6458;
-        --card: #fffdf9;
-        --border: #e0d8cc;
-      }
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        background: var(--cream);
-        color: var(--ink);
-        font-family: 'DM Sans', sans-serif;
-        font-weight: 300;
-        line-height: 1.6;
-        overflow-x: hidden;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USA West Coast 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f5f0e8;
+      --ink:   #1a1a18;
+      --rust:  #c5502a;
+      --sand:  #d4c4a8;
+      --sky:   #3a6ea5;
+      --muted: #6b6458;
+      --card:  #fffdf9;
+      --border:#e0d8cc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
 
-      /* HERO */
-      .hero {
-        position: relative;
-        min-height: 100svh;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 2rem 1.5rem 3rem;
-        overflow: hidden;
-        background: var(--ink);
-      }
-      .hero-bg {
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(
-            ellipse at 70% 30%,
-            rgba(58, 110, 165, 0.25) 0%,
-            transparent 60%
-          ),
-          radial-gradient(
-            ellipse at 20% 80%,
-            rgba(197, 80, 42, 0.2) 0%,
-            transparent 50%
-          ),
-          linear-gradient(160deg, #1a1a18 0%, #2c2820 50%, #1a1a18 100%);
-      }
-      .hero-texture {
-        position: absolute;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      }
-      .hero-stamp {
-        position: absolute;
-        top: 2rem;
-        right: 1.5rem;
-        width: 80px;
-        height: 80px;
-        border: 3px solid var(--rust);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: var(--rust);
-        font-family: 'DM Mono', monospace;
-        font-size: 0.55rem;
-        letter-spacing: 0.05em;
-        line-height: 1.3;
-        transform: rotate(12deg);
-        opacity: 0.9;
-      }
-      .hero-label {
-        position: relative;
-        font-family: 'DM Mono', monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--rust);
-        margin-bottom: 0.75rem;
-      }
-      .hero-title {
-        position: relative;
-        font-family: 'Playfair Display', serif;
-        font-size: clamp(3rem, 14vw, 6rem);
-        font-weight: 900;
-        line-height: 0.9;
-        color: var(--cream);
-        margin-bottom: 1.5rem;
-      }
-      .hero-title span {
-        color: var(--rust);
-      }
-      .hero-meta {
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-      }
-      .hero-meta-item {
-        display: flex;
-        flex-direction: column;
-      }
-      .hero-meta-item .lbl {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #7a7065;
-        margin-bottom: 0.15rem;
-      }
-      .hero-meta-item .val {
-        font-size: 0.85rem;
-        color: var(--sand);
-        font-weight: 400;
-      }
-      .hero-scroll {
-        position: relative;
-        margin-top: 2.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        color: #6b6458;
-        font-family: 'DM Mono', monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.15em;
-      }
-      .scroll-line {
-        width: 40px;
-        height: 1px;
-        background: var(--rust);
-        animation: sline 2s ease-in-out infinite;
-      }
-      @keyframes sline {
-        0%,
-        100% {
-          width: 40px;
-          opacity: 1;
-        }
-        50% {
-          width: 60px;
-          opacity: 0.5;
-        }
-      }
+    /* ── HERO ── */
+    .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem 1.5rem 3rem; overflow: hidden; background: var(--ink); }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(58,110,165,.25) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(197,80,42,.2) 0%, transparent 50%), linear-gradient(160deg, #1a1a18 0%, #2c2820 50%, #1a1a18 100%); }
+    .hero-texture { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .hero-stamp { position: absolute; top: 2rem; right: 1.5rem; width: 80px; height: 80px; border: 3px solid var(--rust); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--rust); font-family: 'DM Mono', monospace; font-size: .55rem; letter-spacing: .05em; line-height: 1.3; transform: rotate(12deg); opacity: .9; }
+    .hero-label { position: relative; font-family: 'DM Mono', monospace; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--rust); margin-bottom: .75rem; }
+    .hero-title { position: relative; font-family: 'Playfair Display', serif; font-size: clamp(3rem, 14vw, 6rem); font-weight: 900; line-height: .9; color: var(--cream); margin-bottom: 1.5rem; }
+    .hero-title span { color: var(--rust); }
+    .hero-meta { position: relative; display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .hero-meta-item { display: flex; flex-direction: column; }
+    .hero-meta-item .lbl { font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: #7a7065; margin-bottom: .15rem; }
+    .hero-meta-item .val { font-size: .85rem; color: var(--sand); font-weight: 400; }
+    .hero-scroll { position: relative; margin-top: 2.5rem; display: flex; align-items: center; gap: .75rem; color: #6b6458; font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .15em; }
+    .scroll-line { width: 40px; height: 1px; background: var(--rust); animation: sline 2s ease-in-out infinite; }
+    @keyframes sline { 0%,100%{width:40px;opacity:1} 50%{width:60px;opacity:.5} }
 
-      /* NAV */
-      .nav {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: rgba(245, 240, 232, 0.96);
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid var(--border);
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-      .nav::-webkit-scrollbar {
-        display: none;
-      }
-      .nav-inner {
-        display: flex;
-        min-width: max-content;
-        padding: 0 1rem;
-      }
-      .nav-btn {
-        padding: 0.9rem 1rem;
-        background: none;
-        border: none;
-        border-bottom: 2px solid transparent;
-        font-family: 'DM Mono', monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--muted);
-        cursor: pointer;
-        transition: all 0.2s;
-        white-space: nowrap;
-      }
-      .nav-btn:hover {
-        color: var(--ink);
-      }
-      .nav-btn.active {
-        color: var(--rust);
-        border-bottom-color: var(--rust);
-      }
+    /* ── NAV ── */
+    .nav { position: sticky; top: 0; z-index: 100; background: rgba(245,240,232,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav-inner { display: flex; min-width: max-content; padding: 0 1rem; }
+    .nav-btn { padding: .9rem 1rem; background: none; border: none; border-bottom: 2px solid transparent; font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: all .2s; white-space: nowrap; }
+    .nav-btn:hover { color: var(--ink); }
+    .nav-btn.active { color: var(--rust); border-bottom-color: var(--rust); }
 
-      /* SECTIONS */
-      .section {
-        display: none;
-        animation: fadeIn 0.3s ease;
-      }
-      .section.active {
-        display: block;
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(8px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+    /* ── SECTIONS ── */
+    .section { display: none; animation: fadeIn .3s ease; }
+    .section.active { display: block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
-      /* OVERVIEW */
-      .ov-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1px;
-        background: var(--border);
-        border-top: 1px solid var(--border);
-      }
-      .ov-card {
-        background: var(--card);
-        padding: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-      }
-      .ov-card.full {
-        grid-column: 1/-1;
-      }
-      .ov-card .oc-lbl {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-      .ov-card .oc-val {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.35rem;
-        font-weight: 700;
-        color: var(--ink);
-        line-height: 1.2;
-      }
-      .ov-card .oc-sub {
-        font-size: 0.75rem;
-        color: var(--muted);
-      }
+    /* ── OVERVIEW ── */
+    .ov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-top: 1px solid var(--border); }
+    .ov-card { background: var(--card); padding: 1.5rem; display: flex; flex-direction: column; gap: .25rem; }
+    .ov-card.full { grid-column: 1/-1; }
+    .ov-card .oc-lbl { font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+    .ov-card .oc-val { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
+    .ov-card .oc-sub { font-size: .75rem; color: var(--muted); }
+    .sec-title { padding: 2rem 1.5rem 1rem; font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); }
 
-      .sec-title {
-        padding: 2rem 1.5rem 1rem;
-        font-family: 'DM Mono', monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--muted);
-        border-bottom: 1px solid var(--border);
-      }
+    /* ── FLIGHT CARD ── */
+    .flight-card { background: var(--card); padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); }
+    .flight-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: .75rem; }
+    .flight-num { font-family: 'DM Mono', monospace; font-size: .7rem; letter-spacing: .1em; color: var(--rust); }
+    .flight-date { font-family: 'DM Mono', monospace; font-size: .65rem; color: var(--muted); }
+    .flight-route { display: flex; align-items: center; gap: .75rem; }
+    .fa { text-align: center; }
+    .fa .code { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; line-height: 1; }
+    .fa .city { font-size: .62rem; color: var(--muted); }
+    .fa .time { font-size: .8rem; color: var(--ink); margin-top: .2rem; }
+    .fl { flex: 1; display: flex; flex-direction: column; align-items: center; gap: .2rem; }
+    .fl .dur { font-family: 'DM Mono', monospace; font-size: .58rem; color: var(--muted); }
+    .flight-arc-wrap { width: 100%; padding: .2rem 0; }
+    .flight-arc { width: 100%; height: auto; display: block; overflow: visible; }
+    .arc-drawn { transition: stroke-dashoffset 2.5s ease-in-out; }
+    .flight-links { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .75rem; padding-top: .6rem; border-top: 1px dashed var(--border); }
 
-      /* FLIGHT CARD */
-      .flight-card {
-        background: var(--card);
-        padding: 1.25rem 1.5rem;
-        border-bottom: 1px solid var(--border);
-      }
-      .flight-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 0.75rem;
-      }
-      .flight-num {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.1em;
-        color: var(--rust);
-      }
-      .flight-date {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.65rem;
-        color: var(--muted);
-      }
-      .flight-route {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-      .fa {
-        text-align: center;
-      }
-      .fa .code {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.7rem;
-        font-weight: 700;
-        line-height: 1;
-      }
-      .fa .city {
-        font-size: 0.62rem;
-        color: var(--muted);
-      }
-      .fa .time {
-        font-size: 0.8rem;
-        color: var(--ink);
-        margin-top: 0.2rem;
-      }
-      .fl {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.2rem;
-      }
-      .fl .dur {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.58rem;
-        color: var(--muted);
-      }
-      .fl .ln {
-        width: 100%;
-        height: 1px;
-        background: var(--ink);
-        position: relative;
-      }
-      .fl .ln::after {
-        content: '▶';
-        position: absolute;
-        right: -4px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 0.45rem;
-      }
+    /* ── ROUTE LIST ── */
+    .route-list { padding: 1.25rem 1.5rem; background: var(--card); border-bottom: 1px solid var(--border); }
+    .route-item { display: flex; align-items: center; gap: .75rem; margin-bottom: .7rem; }
+    .route-item:last-child { margin-bottom: 0; }
+    .ri-date { font-family: 'DM Mono', monospace; font-size: .58rem; color: var(--muted); width: 3.2rem; flex-shrink: 0; }
+    .ri-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .ri-dot.rust { background: var(--rust); }
+    .ri-dot.sky  { background: var(--sky); }
+    .ri-text { font-size: .85rem; }
 
-      /* ROUTE LIST */
-      .route-list {
-        padding: 1.25rem 1.5rem;
-        background: var(--card);
-        border-bottom: 1px solid var(--border);
-      }
-      .route-item {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 0.7rem;
-      }
-      .route-item:last-child {
-        margin-bottom: 0;
-      }
-      .ri-date {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.58rem;
-        color: var(--muted);
-        width: 3.2rem;
-        flex-shrink: 0;
-      }
-      .ri-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        flex-shrink: 0;
-      }
-      .ri-dot.rust {
-        background: var(--rust);
-      }
-      .ri-dot.sky {
-        background: var(--sky);
-      }
-      .ri-text {
-        font-size: 0.85rem;
-      }
+    /* ── DAY CARDS ── */
+    .day-card { border-bottom: 1px solid var(--border); overflow: hidden; }
+    .day-header { display: flex; align-items: center; padding: 1.1rem 1.5rem; cursor: pointer; background: var(--card); user-select: none; -webkit-tap-highlight-color: transparent; transition: background .15s; }
+    .day-header:active { background: var(--cream); }
+    .day-date-box { width: 50px; height: 50px; border: 1.5px solid var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; margin-right: 1rem; }
+    .day-date-box .dm { font-family: 'DM Mono', monospace; font-size: .48rem; letter-spacing: .1em; text-transform: uppercase; color: var(--rust); }
+    .day-date-box .dn { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; line-height: 1; }
+    .day-info { flex: 1; }
+    .day-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; line-height: 1.2; }
+    .day-sub { font-size: .7rem; color: var(--muted); margin-top: .15rem; }
+    .day-chev { color: var(--muted); font-size: .7rem; transition: transform .3s; margin-left: .75rem; }
+    .day-card.open .day-chev { transform: rotate(90deg); }
+    .day-body { display: none; padding: 0 1.5rem 1.5rem; background: var(--cream); }
+    .day-card.open .day-body { display: block; }
 
-      /* DAY CARDS */
-      .day-card {
-        border-bottom: 1px solid var(--border);
-        overflow: hidden;
-      }
-      .day-header {
-        display: flex;
-        align-items: center;
-        padding: 1.1rem 1.5rem;
-        cursor: pointer;
-        background: var(--card);
-        user-select: none;
-        -webkit-tap-highlight-color: transparent;
-        transition: background 0.15s;
-      }
-      .day-header:active {
-        background: var(--cream);
-      }
-      .day-date-box {
-        width: 50px;
-        height: 50px;
-        border: 1.5px solid var(--ink);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        margin-right: 1rem;
-      }
-      .day-date-box .dm {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.48rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--rust);
-      }
-      .day-date-box .dn {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.3rem;
-        font-weight: 700;
-        line-height: 1;
-      }
-      .day-info {
-        flex: 1;
-      }
-      .day-title {
-        font-family: 'Playfair Display', serif;
-        font-size: 1rem;
-        font-weight: 700;
-        line-height: 1.2;
-      }
-      .day-sub {
-        font-size: 0.7rem;
-        color: var(--muted);
-        margin-top: 0.15rem;
-      }
-      .day-chev {
-        color: var(--muted);
-        font-size: 0.7rem;
-        transition: transform 0.3s;
-        margin-left: 0.75rem;
-      }
-      .day-card.open .day-chev {
-        transform: rotate(90deg);
-      }
-      .day-body {
-        display: none;
-        padding: 0 1.5rem 1.5rem;
-        background: var(--cream);
-      }
-      .day-card.open .day-body {
-        display: block;
-      }
+    /* ── COVER IMAGE ── */
+    .day-cover-wrap { position: relative; margin: 0 -1.5rem; overflow: hidden; }
+    .day-cover { display: block; width: 100%; height: 200px; object-fit: cover; opacity: 0; transition: opacity .5s ease; cursor: zoom-in; }
+    .day-cover.loaded { opacity: 1; }
+    .day-cover-label { position: absolute; bottom: 0; left: 0; right: 0; padding: .4rem .75rem; background: linear-gradient(transparent, rgba(0,0,0,.55)); font-family: 'DM Mono', monospace; font-size: .55rem; letter-spacing: .1em; color: rgba(255,255,255,.8); }
 
-      /* TIMELINE */
-      .tl {
-        position: relative;
-        padding-top: 1rem;
-      }
-      .tl-item {
-        display: flex;
-        gap: 0.75rem;
-        margin-bottom: 1.1rem;
-        position: relative;
-      }
-      .tl-item:not(:last-child)::before {
-        content: '';
-        position: absolute;
-        left: 2.2rem;
-        top: 1.4rem;
-        bottom: -1.1rem;
-        width: 1px;
-        background: var(--border);
-      }
-      .tl-time {
-        width: 2.2rem;
-        padding-top: 0.05rem;
-        font-family: 'DM Mono', monospace;
-        font-size: 0.58rem;
-        color: var(--muted);
-        text-align: right;
-        flex-shrink: 0;
-      }
-      .tl-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--rust);
-        flex-shrink: 0;
-        margin-top: 0.35rem;
-      }
-      .tl-dot.sky {
-        background: var(--sky);
-      }
-      .tl-dot.gray {
-        background: var(--sand);
-      }
-      .tl-con {
-        flex: 1;
-      }
-      .tl-name {
-        font-weight: 500;
-        font-size: 0.88rem;
-        line-height: 1.3;
-      }
-      .tl-detail {
-        font-size: 0.72rem;
-        color: var(--muted);
-        margin-top: 0.1rem;
-      }
-      .tl-tag {
-        display: inline-block;
-        margin-top: 0.3rem;
-        padding: 0.12rem 0.45rem;
-        background: var(--cream);
-        border: 1px solid var(--border);
-        font-family: 'DM Mono', monospace;
-        font-size: 0.52rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--muted);
-        border-radius: 2px;
-      }
-      .tl-tag.food {
-        border-color: var(--rust);
-        color: var(--rust);
-      }
-      .tl-tag.stay {
-        border-color: var(--sky);
-        color: var(--sky);
-      }
+    /* ── TIMELINE ── */
+    .tl { position: relative; padding-top: 1rem; }
+    .tl-item { display: flex; gap: .75rem; margin-bottom: 1.1rem; position: relative; }
+    .tl-item:not(:last-child)::before { content: ''; position: absolute; left: 2.2rem; top: 1.4rem; bottom: -1.1rem; width: 1px; background: var(--border); }
+    .tl-time { width: 2.2rem; padding-top: .05rem; font-family: 'DM Mono', monospace; font-size: .58rem; color: var(--muted); text-align: right; flex-shrink: 0; }
+    .tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rust); flex-shrink: 0; margin-top: .35rem; }
+    .tl-dot.sky  { background: var(--sky); }
+    .tl-dot.gray { background: var(--sand); }
+    .tl-con { flex: 1; }
+    .tl-name { font-weight: 500; font-size: .88rem; line-height: 1.3; }
+    .tl-detail { font-size: .72rem; color: var(--muted); margin-top: .1rem; }
+    .tl-tag { display: inline-block; margin-top: .3rem; padding: .12rem .45rem; background: var(--cream); border: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); border-radius: 2px; }
+    .tl-tag.food { border-color: var(--rust); color: var(--rust); }
+    .tl-tag.stay { border-color: var(--sky);  color: var(--sky); }
 
-      /* FOOD OPTS */
-      .food-opts {
-        display: flex;
-        gap: 0.4rem;
-        flex-wrap: wrap;
-        margin-top: 0.35rem;
-      }
-      .food-opt {
-        padding: 0.2rem 0.55rem;
-        border: 1px solid var(--rust);
-        font-size: 0.7rem;
-        color: var(--rust);
-        border-radius: 2px;
-      }
+    /* ── FOOD OPTS ── */
+    .food-opts { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: .35rem; }
+    .food-opt { padding: .2rem .55rem; border: 1px solid var(--rust); font-size: .7rem; color: var(--rust); border-radius: 2px; text-decoration: none; cursor: pointer; }
+    .food-opt:hover { background: rgba(197,80,42,.1); }
 
-      /* PLACE CHIPS */
-      .places {
-        margin-top: 0.65rem;
-        padding-top: 0.65rem;
-        border-top: 1px dashed var(--border);
-      }
-      .places-lbl {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.52rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin-bottom: 0.4rem;
-      }
-      .chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.3rem;
-      }
-      .chip {
-        padding: 0.2rem 0.55rem;
-        background: var(--card);
-        border: 1px solid var(--border);
-        font-size: 0.68rem;
-        color: var(--ink);
-        border-radius: 20px;
-      }
+    /* ── PLACE CHIPS ── */
+    .places { margin-top: .65rem; padding-top: .65rem; border-top: 1px dashed var(--border); }
+    .places-lbl { font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-bottom: .4rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: .3rem; }
+    .chip { padding: .2rem .55rem; background: var(--card); border: 1px solid var(--border); font-size: .68rem; color: var(--ink); border-radius: 20px; text-decoration: none; transition: background .15s, color .15s, border-color .15s; }
+    .chip:hover { background: var(--sky); color: white; border-color: var(--sky); }
 
-      /* INFO BLOCK */
-      .info-blk {
-        background: var(--card);
-        border: 1px solid var(--border);
-        margin: 1rem 1.5rem;
-        padding: 1.25rem;
-      }
-      .info-blk-title {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: var(--rust);
-        margin-bottom: 0.75rem;
-      }
-      .ir {
-        display: flex;
-        gap: 0.5rem;
-        margin-bottom: 0.45rem;
-        font-size: 0.8rem;
-      }
-      .ir .k {
-        color: var(--muted);
-        min-width: 68px;
-        flex-shrink: 0;
-        font-family: 'DM Mono', monospace;
-        font-size: 0.62rem;
-      }
-      .ir .v {
-        color: var(--ink);
-      }
+    /* ── SPOT IMAGES ── */
+    .spot-img { display: block; width: 100%; height: 160px; object-fit: cover; border-radius: 6px; margin-top: .65rem; background: var(--border); opacity: 0; transition: opacity .4s ease; cursor: zoom-in; }
+    .spot-img.loaded { opacity: 1; }
+    .spot-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; margin-top: .65rem; }
+    .spot-imgs .spot-img { margin-top: 0; height: 110px; }
 
-      /* BUDGET */
-      .budget-wrap {
-        margin: 0 1.5rem 1.5rem;
-      }
-      .budget-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.7rem 0;
-        border-bottom: 1px solid var(--border);
-        font-size: 0.82rem;
-      }
-      .budget-row:last-child {
-        border-bottom: none;
-      }
-      .budget-row .bl {
-        color: var(--muted);
-        font-size: 0.78rem;
-      }
-      .budget-row .ba {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.78rem;
-      }
-      .budget-row.tot {
-        padding-top: 1rem;
-        border-top: 2px solid var(--ink);
-      }
-      .budget-row.tot .bl {
-        font-family: 'Playfair Display', serif;
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: var(--ink);
-      }
-      .budget-row.tot .ba {
-        font-size: 0.95rem;
-        color: var(--rust);
-      }
+    /* ── LINKS ── */
+    a.lnk { display: inline-flex; align-items: center; gap: .35rem; padding: .3rem .7rem; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .06em; text-decoration: none; border-radius: 20px; white-space: nowrap; transition: background .18s, color .18s, border-color .18s, transform .12s; border: 1.5px solid transparent; font-weight: 500; }
+    a.lnk:active { transform: scale(.96); }
+    a.lnk-map    { background: rgba(197,80,42,.1);  border-color: rgba(197,80,42,.35); color: var(--rust); }
+    a.lnk-map:hover { background: var(--rust); color: white; border-color: var(--rust); }
+    a.lnk-web    { background: rgba(26,26,24,.06);  border-color: rgba(26,26,24,.2);   color: var(--muted); }
+    a.lnk-web:hover { background: var(--ink); color: white; border-color: var(--ink); }
+    a.lnk-flight { background: rgba(58,110,165,.08); border-color: rgba(58,110,165,.3); color: var(--sky); }
+    a.lnk-flight:hover { background: var(--sky); color: white; border-color: var(--sky); }
+    a.lnk-ua     { background: rgba(0,93,170,.08);  border-color: rgba(0,93,170,.3);   color: #005daa; }
+    a.lnk-ua:hover { background: #005daa; color: white; border-color: #005daa; }
+    .link-row         { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
+    .link-row-inline  { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .3rem; }
 
-      footer {
-        padding: 3rem 1.5rem;
-        text-align: center;
-        border-top: 1px solid var(--border);
-      }
-      footer .ft {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.6rem;
-        font-weight: 900;
-        margin-bottom: 0.4rem;
-      }
-      footer .fs {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.58rem;
-        letter-spacing: 0.2em;
-        color: var(--muted);
-      }
+    /* ── INFO BLOCK ── */
+    .info-blk { background: var(--card); border: 1px solid var(--border); margin: 1rem 1.5rem; padding: 1.25rem; }
+    .info-blk-title { font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--rust); margin-bottom: .75rem; }
+    .ir { display: flex; gap: .5rem; margin-bottom: .45rem; font-size: .8rem; }
+    .ir .k { color: var(--muted); min-width: 68px; flex-shrink: 0; font-family: 'DM Mono', monospace; font-size: .62rem; }
+    .ir .v { color: var(--ink); }
 
-      /* ── FLIGHT ARC ANIMATION ── */
-      .flight-arc-wrap {
-        width: 100%;
-        padding: 0.2rem 0;
-      }
-      .flight-arc {
-        width: 100%;
-        height: auto;
-        display: block;
-        overflow: visible;
-      }
-      .arc-drawn {
-        transition: stroke-dashoffset 2.5s ease-in-out;
-      }
-      .flight-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-        margin-top: 0.75rem;
-        padding-top: 0.6rem;
-        border-top: 1px dashed var(--border);
-      }
+    /* ── BUDGET ── */
+    .budget-wrap { margin: 0 1.5rem 1.5rem; }
+    .budget-row { display: flex; justify-content: space-between; align-items: center; padding: .7rem 0; border-bottom: 1px solid var(--border); font-size: .82rem; }
+    .budget-row:last-child { border-bottom: none; }
+    .budget-row .bl { color: var(--muted); font-size: .78rem; }
+    .budget-row .ba { font-family: 'DM Mono', monospace; font-size: .78rem; }
+    .budget-row.tot { padding-top: 1rem; border-top: 2px solid var(--ink); }
+    .budget-row.tot .bl { font-family: 'Playfair Display', serif; font-size: .95rem; font-weight: 700; color: var(--ink); }
+    .budget-row.tot .ba { font-size: .95rem; color: var(--rust); }
 
-      /* ── 統一連結系統 ── */
-      /* 基底樣式：所有 link 共用 */
-      a.lnk {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        padding: 0.3rem 0.7rem;
-        font-family: 'DM Mono', monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.06em;
-        text-decoration: none;
-        border-radius: 20px;
-        white-space: nowrap;
-        transition:
-          background 0.18s,
-          color 0.18s,
-          border-color 0.18s,
-          transform 0.12s;
-        border: 1.5px solid transparent;
-        font-weight: 500;
-      }
-      a.lnk:active {
-        transform: scale(0.96);
-      }
+    /* ── YOSEMITE MAP ── */
+    .yos-wrap { margin: 1rem 0 .75rem; border-radius: 8px; overflow: hidden; background: #1b2e1e; }
+    .yos-header { display: flex; align-items: center; justify-content: space-between; padding: .6rem 1rem; background: rgba(0,0,0,.35); }
+    .yos-title { font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: #90c498; }
+    .yos-tabs { display: flex; gap: .35rem; }
+    .yos-tab { padding: .18rem .55rem; background: transparent; border: 1px solid #3d5e42; border-radius: 20px; font-family: 'DM Mono', monospace; font-size: .55rem; color: #6aad72; cursor: pointer; transition: all .2s; }
+    .yos-tab.active { background: #4a7c59; color: white; border-color: #4a7c59; }
+    .yos-svg-wrap svg { width: 100%; height: auto; display: block; }
+    .yos-legend { display: flex; gap: 1.2rem; padding: .45rem 1rem; background: rgba(0,0,0,.25); flex-wrap: wrap; }
+    .yos-leg { display: flex; align-items: center; gap: .35rem; font-family: 'DM Mono', monospace; font-size: .5rem; color: #6aad72; }
+    .yos-leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
-      /* 地圖連結：橘紅底 */
-      a.lnk-map {
-        background: rgba(197, 80, 42, 0.1);
-        border-color: rgba(197, 80, 42, 0.35);
-        color: var(--rust);
-      }
-      a.lnk-map:hover {
-        background: var(--rust);
-        color: white;
-        border-color: var(--rust);
-      }
+    /* ── LIGHTBOX ── */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,.92); align-items: center; justify-content: center; flex-direction: column; padding: 1rem; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 75vh; object-fit: contain; border-radius: 4px; }
+    .lightbox-caption { margin-top: .75rem; color: rgba(255,255,255,.65); font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .08em; text-align: center; }
+    .lightbox-close { position: absolute; top: 1rem; right: 1.25rem; background: none; border: none; color: white; font-size: 1.4rem; cursor: pointer; line-height: 1; padding: .25rem; opacity: .7; }
+    .lightbox-close:hover { opacity: 1; }
 
-      /* 網站連結：深色底 */
-      a.lnk-web {
-        background: rgba(26, 26, 24, 0.06);
-        border-color: rgba(26, 26, 24, 0.2);
-        color: var(--muted);
-      }
-      a.lnk-web:hover {
-        background: var(--ink);
-        color: white;
-        border-color: var(--ink);
-      }
+    footer { padding: 3rem 1.5rem; text-align: center; border-top: 1px solid var(--border); }
+    footer .ft { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; margin-bottom: .4rem; }
+    footer .fs { font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .2em; color: var(--muted); }
+  </style>
+</head>
+<body>
 
-      /* 航班追蹤：藍色系 */
-      a.lnk-flight {
-        background: rgba(58, 110, 165, 0.08);
-        border-color: rgba(58, 110, 165, 0.3);
-        color: var(--sky);
-      }
-      a.lnk-flight:hover {
-        background: var(--sky);
-        color: white;
-        border-color: var(--sky);
-      }
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-stamp">UNITED<br>STATES<br>2026<br>APR</div>
+  <p class="hero-label">Road Trip Itinerary</p>
+  <h1 class="hero-title">USA<br><span>West</span><br>Coast</h1>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="lbl">Departure</span><span class="val">Apr 2, 2026</span></div>
+    <div class="hero-meta-item"><span class="lbl">Return</span><span class="val">Apr 17, 2026</span></div>
+    <div class="hero-meta-item"><span class="lbl">Travelers</span><span class="val">5 People</span></div>
+    <div class="hero-meta-item"><span class="lbl">Vehicle</span><span class="val">7-pax Minivan</span></div>
+  </div>
+  <div class="hero-scroll"><span class="scroll-line"></span>往下探索</div>
+</section>
 
-      /* United Airlines 專屬藍 */
-      a.lnk-ua {
-        background: rgba(0, 93, 170, 0.08);
-        border-color: rgba(0, 93, 170, 0.3);
-        color: #005daa;
-      }
-      a.lnk-ua:hover {
-        background: #005daa;
-        color: white;
-        border-color: #005daa;
-      }
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" data-tab="overview">Overview</button>
+    <button class="nav-btn" data-tab="days">每日行程</button>
+    <button class="nav-btn" data-tab="stays">住宿 &amp; 租車</button>
+    <button class="nav-btn" data-tab="budget">費用</button>
+  </div>
+</nav>
 
-      /* 連結群組 */
-      .link-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-        margin-top: 0.4rem;
-      }
-      .link-row-inline {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-        margin-top: 0.3rem;
-      }
+<!-- OVERVIEW -->
+<div id="tab-overview" class="section active">
+  <div class="ov-grid">
+    <div class="ov-card full"><span class="oc-lbl">路線</span><span class="oc-val">SF → Yosemite → LA → Seattle</span><span class="oc-sub">West Coast Loop · 15 Nights</span></div>
+    <div class="ov-card"><span class="oc-lbl">日期</span><span class="oc-val">Apr 2–17</span><span class="oc-sub">2026</span></div>
+    <div class="ov-card"><span class="oc-lbl">旅伴</span><span class="oc-val">5 人</span><span class="oc-sub">Hsuanlin · Mingku · Hsingyen · Hsienhao · Muyun</span></div>
+    <div class="ov-card full"><span class="oc-lbl">租車</span><span class="oc-val">Chrysler Pacifica</span><span class="oc-sub">Alamo · 7-pax · Auto · SFO pick-up → SEA return</span></div>
+  </div>
 
-      /* 住宿地圖連結行 */
-      .addr-map-row {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-      }
-      .addr-map-row .v-text {
-        flex: 1;
-        min-width: 0;
-      }
+  <p class="sec-title">航班</p>
 
-      /* chip 連結 */
-      a.chip {
-        text-decoration: none;
-        transition:
-          background 0.15s,
-          color 0.15s,
-          border-color 0.15s;
-      }
-      a.chip:hover {
-        background: var(--sky);
-        color: white;
-        border-color: var(--sky);
-      }
-
-      /* food-opt 連結 */
-      a.food-opt {
-        text-decoration: none;
-        cursor: pointer;
-      }
-      a.food-opt:hover {
-        background: rgba(197, 80, 42, 0.12);
-        border-color: var(--rust);
-      }
-
-      /* ── YOSEMITE MAP ── */
-      .yos-wrap {
-        margin: 1rem 0 0.75rem;
-        border-radius: 8px;
-        overflow: hidden;
-        background: #1b2e1e;
-      }
-      .yos-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.6rem 1rem;
-        background: rgba(0, 0, 0, 0.35);
-      }
-      .yos-title {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.58rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #90c498;
-      }
-      .yos-tabs {
-        display: flex;
-        gap: 0.35rem;
-      }
-      .yos-tab {
-        padding: 0.18rem 0.55rem;
-        background: transparent;
-        border: 1px solid #3d5e42;
-        border-radius: 20px;
-        font-family: 'DM Mono', monospace;
-        font-size: 0.55rem;
-        color: #6aad72;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .yos-tab.active {
-        background: #4a7c59;
-        color: white;
-        border-color: #4a7c59;
-      }
-      .yos-svg-wrap svg {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-      .yos-legend {
-        display: flex;
-        gap: 1.2rem;
-        padding: 0.45rem 1rem;
-        background: rgba(0, 0, 0, 0.25);
-        flex-wrap: wrap;
-      }
-      .yos-leg {
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
-        font-family: 'DM Mono', monospace;
-        font-size: 0.5rem;
-        color: #6aad72;
-      }
-      .yos-leg-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        flex-shrink: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-texture"></div>
-      <div class="hero-stamp">UNITED<br />STATES<br />2026<br />APR</div>
-      <p class="hero-label">Road Trip Itinerary</p>
-      <h1 class="hero-title">USA<br /><span>West</span><br />Coast</h1>
-      <div class="hero-meta">
-        <div class="hero-meta-item">
-          <span class="lbl">Departure</span>
-          <span class="val">Apr 2, 2026</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="lbl">Return</span>
-          <span class="val">Apr 17, 2026</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="lbl">Travelers</span>
-          <span class="val">5 People</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="lbl">Vehicle</span>
-          <span class="val">7 人座廂型車</span>
+  <div class="flight-card">
+    <div class="flight-top"><span class="flight-num">UA 872 · 去程</span><span class="flight-date">Apr 2</span></div>
+    <div class="flight-route">
+      <div class="fa"><div class="code">TPE</div><div class="city">台北</div><div class="time">9:50 AM</div></div>
+      <div class="fl">
+        <span class="dur">11h 40m</span>
+        <div class="flight-arc-wrap">
+          <svg class="flight-arc" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8,32 Q80,-8 152,32" fill="none" stroke="var(--border)" stroke-width="1.5"/>
+            <path id="arc1" d="M8,32 Q80,-8 152,32" fill="none" stroke="var(--rust)" stroke-width="1.5" stroke-dasharray="200" stroke-dashoffset="200" class="arc-drawn"/>
+            <g id="plane1" style="transform:translate(8px,32px)"><text font-size="10" text-anchor="middle" dominant-baseline="middle" style="user-select:none">✈</text></g>
+          </svg>
         </div>
       </div>
-      <div class="hero-scroll">
-        <span class="scroll-line"></span>
-        往下探索
-      </div>
-    </section>
-
-    <!-- NAV -->
-    <nav class="nav">
-      <div class="nav-inner">
-        <button class="nav-btn active" data-tab="overview">Overview</button>
-        <button class="nav-btn" data-tab="days">每日行程</button>
-        <button class="nav-btn" data-tab="stays">住宿 &amp; 租車</button>
-        <button class="nav-btn" data-tab="budget">費用</button>
-      </div>
-    </nav>
-
-    <!-- OVERVIEW -->
-    <div id="tab-overview" class="section active">
-      <div class="ov-grid">
-        <div class="ov-card full">
-          <span class="oc-lbl">路線</span>
-          <span class="oc-val">SF → Yosemite → LA → Seattle</span>
-          <span class="oc-sub">西岸環線 · 15 晚</span>
-        </div>
-        <div class="ov-card">
-          <span class="oc-lbl">日期</span>
-          <span class="oc-val">Apr 2–17</span>
-          <span class="oc-sub">2026</span>
-        </div>
-        <div class="ov-card">
-          <span class="oc-lbl">旅伴</span>
-          <span class="oc-val">5 人</span>
-          <span class="oc-sub"
-            >Hsuanlin · Mingku · Hsingyen · Hsienhao · Muyun</span
-          >
-        </div>
-        <div class="ov-card full">
-          <span class="oc-lbl">租車</span>
-          <span class="oc-val">Chrysler Pacifica</span>
-          <span class="oc-sub"
-            >Alamo · 7 人座 · 自排 · SFO 取車 → SEA 還車</span
-          >
-        </div>
-      </div>
-
-      <p class="sec-title">航班</p>
-
-      <!-- UA 872 Outbound -->
-      <div class="flight-card">
-        <div class="flight-top">
-          <span class="flight-num">UA 872 · 去程</span>
-          <span class="flight-date">Apr 2</span>
-        </div>
-        <div class="flight-route">
-          <div class="fa">
-            <div class="code">TPE</div>
-            <div class="city">台北</div>
-            <div class="time">9:50 AM</div>
-          </div>
-          <div class="fl">
-            <span class="dur">11h 40m</span>
-            <div class="flight-arc-wrap">
-              <svg
-                class="flight-arc"
-                viewBox="0 0 160 40"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  class="arc-path"
-                  d="M8,32 Q80,-8 152,32"
-                  fill="none"
-                  stroke="var(--border)"
-                  stroke-width="1.5"
-                />
-                <path
-                  class="arc-path arc-drawn"
-                  id="arc1"
-                  d="M8,32 Q80,-8 152,32"
-                  fill="none"
-                  stroke="var(--rust)"
-                  stroke-width="1.5"
-                  stroke-dasharray="200"
-                  stroke-dashoffset="200"
-                />
-                <g
-                  id="plane1"
-                  style="transform: translate(8px, 32px) rotate(0deg)"
-                >
-                  <text
-                    font-size="10"
-                    text-anchor="middle"
-                    dominant-baseline="middle"
-                    style="user-select: none"
-                  >
-                    ✈
-                  </text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <div class="fa">
-            <div class="code">SFO</div>
-            <div class="city">舊金山</div>
-            <div class="time">6:30 AM</div>
-          </div>
-        </div>
-        <div class="flight-links">
-          <a
-            class="lnk lnk-flight"
-            href="https://www.flightaware.com/live/flight/UAL872"
-            target="_blank"
-            >FlightAware ↗</a
-          >
-          <a
-            class="lnk lnk-flight"
-            href="https://www.flightradar24.com/data/flights/ua872"
-            target="_blank"
-            >FlightRadar24 ↗</a
-          >
-          <a
-            class="lnk lnk-ua"
-            href="https://www.united.com/en/us/flightstatus/details/UA872/2026-04-02"
-            target="_blank"
-            >United Airlines ↗</a
-          >
-        </div>
-      </div>
-
-      <!-- UA 737 Connecting -->
-      <div class="flight-card">
-        <div class="flight-top">
-          <span class="flight-num">UA 737 · 轉機</span>
-          <span class="flight-date">Apr 15</span>
-        </div>
-        <div class="flight-route">
-          <div class="fa">
-            <div class="code">SEA</div>
-            <div class="city">西雅圖</div>
-            <div class="time">7:37 PM</div>
-          </div>
-          <div class="fl">
-            <span class="dur">2h 13m</span>
-            <div class="flight-arc-wrap">
-              <svg
-                class="flight-arc"
-                viewBox="0 0 160 40"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  class="arc-path"
-                  d="M8,28 Q80,4 152,28"
-                  fill="none"
-                  stroke="var(--border)"
-                  stroke-width="1.5"
-                />
-                <path
-                  class="arc-path arc-drawn"
-                  id="arc2"
-                  d="M8,28 Q80,4 152,28"
-                  fill="none"
-                  stroke="var(--sky)"
-                  stroke-width="1.5"
-                  stroke-dasharray="200"
-                  stroke-dashoffset="200"
-                />
-                <g
-                  id="plane2"
-                  style="transform: translate(8px, 28px) rotate(0deg)"
-                >
-                  <text
-                    font-size="10"
-                    text-anchor="middle"
-                    dominant-baseline="middle"
-                    style="user-select: none"
-                  >
-                    ✈
-                  </text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <div class="fa">
-            <div class="code">SFO</div>
-            <div class="city">舊金山</div>
-            <div class="time">9:50 PM</div>
-          </div>
-        </div>
-        <div class="flight-links">
-          <a
-            class="lnk lnk-flight"
-            href="https://www.flightaware.com/live/flight/UAL737"
-            target="_blank"
-            >FlightAware ↗</a
-          >
-          <a
-            class="lnk lnk-flight"
-            href="https://www.flightradar24.com/data/flights/ua737"
-            target="_blank"
-            >FlightRadar24 ↗</a
-          >
-          <a
-            class="lnk lnk-ua"
-            href="https://www.united.com/en/us/flightstatus/details/UA737/2026-04-15"
-            target="_blank"
-            >United Airlines ↗</a
-          >
-        </div>
-      </div>
-
-      <!-- UA 853 Return -->
-      <div class="flight-card">
-        <div class="flight-top">
-          <span class="flight-num">UA 853 · 回程</span>
-          <span class="flight-date">Apr 15 → 17</span>
-        </div>
-        <div class="flight-route">
-          <div class="fa">
-            <div class="code">SFO</div>
-            <div class="city">舊金山</div>
-            <div class="time">11:20 PM</div>
-          </div>
-          <div class="fl">
-            <span class="dur">13h 45m</span>
-            <div class="flight-arc-wrap">
-              <svg
-                class="flight-arc"
-                viewBox="0 0 160 40"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  class="arc-path"
-                  d="M8,32 Q80,-8 152,32"
-                  fill="none"
-                  stroke="var(--border)"
-                  stroke-width="1.5"
-                />
-                <path
-                  class="arc-path arc-drawn"
-                  id="arc3"
-                  d="M8,32 Q80,-8 152,32"
-                  fill="none"
-                  stroke="var(--rust)"
-                  stroke-width="1.5"
-                  stroke-dasharray="200"
-                  stroke-dashoffset="200"
-                />
-                <g
-                  id="plane3"
-                  style="transform: translate(8px, 32px) rotate(0deg)"
-                >
-                  <text
-                    font-size="10"
-                    text-anchor="middle"
-                    dominant-baseline="middle"
-                    style="user-select: none"
-                  >
-                    ✈
-                  </text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <div class="fa">
-            <div class="code">TPE</div>
-            <div class="city">台北</div>
-            <div class="time">4:05 AM</div>
-          </div>
-        </div>
-        <div class="flight-links">
-          <a
-            class="lnk lnk-flight"
-            href="https://www.flightaware.com/live/flight/UAL853"
-            target="_blank"
-            >FlightAware ↗</a
-          >
-          <a
-            class="lnk lnk-flight"
-            href="https://www.flightradar24.com/data/flights/ua853"
-            target="_blank"
-            >FlightRadar24 ↗</a
-          >
-          <a
-            class="lnk lnk-ua"
-            href="https://www.united.com/en/us/flightstatus/details/UA853/2026-04-15"
-            target="_blank"
-            >United Airlines ↗</a
-          >
-        </div>
-      </div>
-
-      <p class="sec-title">行程總覽</p>
-      <div class="route-list">
-        <div class="route-item">
-          <span class="ri-date">4/2–4/4</span><span class="ri-dot rust"></span
-          ><span class="ri-text">San Francisco</span>
-        </div>
-        <div class="route-item">
-          <span class="ri-date">4/4</span><span class="ri-dot rust"></span
-          ><span class="ri-text">San Jose → Livermore → Groveland</span>
-        </div>
-        <div class="route-item">
-          <span class="ri-date">4/5–4/6</span><span class="ri-dot sky"></span
-          ><span class="ri-text">優勝美地國家公園</span>
-        </div>
-        <div class="route-item">
-          <span class="ri-date">4/7</span><span class="ri-dot rust"></span
-          ><span class="ri-text">Groveland → Fresno → Los Angeles</span>
-        </div>
-        <div class="route-item">
-          <span class="ri-date">4/7–4/14</span><span class="ri-dot rust"></span
-          ><span class="ri-text">Los Angeles · Alhambra</span>
-        </div>
-        <div class="route-item">
-          <span class="ri-date">4/15</span><span class="ri-dot rust"></span
-          ><span class="ri-text">LA → SEA → SFO → TPE</span>
-        </div>
-      </div>
+      <div class="fa"><div class="code">SFO</div><div class="city">舊金山</div><div class="time">6:30 AM</div></div>
     </div>
-
-    <!-- DAYS -->
-    <div id="tab-days" class="section">
-      <div id="dayList"></div>
+    <div class="flight-links">
+      <a class="lnk lnk-flight" href="https://www.flightaware.com/live/flight/UAL872" target="_blank">FlightAware ↗</a>
+      <a class="lnk lnk-flight" href="https://www.flightradar24.com/data/flights/ua872" target="_blank">FlightRadar24 ↗</a>
+      <a class="lnk lnk-ua" href="https://www.united.com/en/us/flightstatus/details/UA872/2026-04-02" target="_blank">United Airlines ↗</a>
     </div>
+  </div>
 
-    <!-- STAYS -->
-    <div id="tab-stays" class="section">
-      <p class="sec-title">租車資訊</p>
-      <div class="info-blk">
-        <div class="info-blk-title">Alamo · Chrysler Pacifica Minivan</div>
-        <div class="ir">
-          <span class="k">確認碼</span><span class="v">1594262100</span>
-        </div>
-        <div class="ir">
-          <span class="k">取車</span
-          ><span class="v">Apr 2 · 9:00 AM · SFO</span>
-        </div>
-        <div class="ir">
-          <span class="k">還車</span
-          ><span class="v">Apr 15 · 6:00 PM · SEA</span>
-        </div>
-        <div class="ir">
-          <span class="k">車款</span
-          ><span class="v">自排 · 7 座 · 5 件行李</span>
-        </div>
-        <div class="ir">
-          <span class="k">附加駕駛</span><span class="v">翁慕雲（已包含）</span>
-        </div>
-        <div class="ir">
-          <span class="k">包含</span
-          ><span class="v">損害免責 · 補充責任保障 · 道路救援加強版</span>
-        </div>
-        <div class="ir">
-          <span class="k">總費用</span
-          ><span class="v" style="color: var(--rust); font-weight: 500"
-            >TWD 65,312 (≈ USD $2,046)</span
-          >
+  <div class="flight-card">
+    <div class="flight-top"><span class="flight-num">UA 737 · 轉機</span><span class="flight-date">Apr 15</span></div>
+    <div class="flight-route">
+      <div class="fa"><div class="code">SEA</div><div class="city">西雅圖</div><div class="time">7:37 PM</div></div>
+      <div class="fl">
+        <span class="dur">2h 13m</span>
+        <div class="flight-arc-wrap">
+          <svg class="flight-arc" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8,28 Q80,4 152,28" fill="none" stroke="var(--border)" stroke-width="1.5"/>
+            <path id="arc2" d="M8,28 Q80,4 152,28" fill="none" stroke="var(--sky)" stroke-width="1.5" stroke-dasharray="200" stroke-dashoffset="200" class="arc-drawn"/>
+            <g id="plane2" style="transform:translate(8px,28px)"><text font-size="10" text-anchor="middle" dominant-baseline="middle" style="user-select:none">✈</text></g>
+          </svg>
         </div>
       </div>
+      <div class="fa"><div class="code">SFO</div><div class="city">舊金山</div><div class="time">9:50 PM</div></div>
+    </div>
+    <div class="flight-links">
+      <a class="lnk lnk-flight" href="https://www.flightaware.com/live/flight/UAL737" target="_blank">FlightAware ↗</a>
+      <a class="lnk lnk-flight" href="https://www.flightradar24.com/data/flights/ua737" target="_blank">FlightRadar24 ↗</a>
+      <a class="lnk lnk-ua" href="https://www.united.com/en/us/flightstatus/details/UA737/2026-04-15" target="_blank">United Airlines ↗</a>
+    </div>
+  </div>
 
-      <p class="sec-title">住宿</p>
-
-      <div class="info-blk">
-        <div class="info-blk-title">San Francisco Airbnb · 4/2 – 4/4</div>
-        <div class="ir">
-          <span class="k">房東</span
-          ><span class="v">Joyce Chan · 1-510-509-5348</span>
-        </div>
-        <div class="ir">
-          <span class="k">地址</span>
-          <span class="v">
-            1563 27th Ave, San Francisco, CA 94122
-            <div class="link-row-inline">
-              <a
-                class="lnk lnk-map"
-                href="https://maps.app.goo.gl/fJPS7K7AF9QiK67b9"
-                target="_blank"
-                >📍 Google Maps</a
-              >
-            </div>
-          </span>
-        </div>
-        <div class="ir">
-          <span class="k">房型</span
-          ><span class="v">2 房 / 2 衛 · 8 人 · 金門公園旁</span>
-        </div>
-        <div class="ir">
-          <span class="k">評分</span><span class="v">★ 4.98 · 173 則評價</span>
-        </div>
-        <div class="ir">
-          <span class="k">入住</span
-          ><span class="v">15:00（可 11:10 先放行李）</span>
-        </div>
-        <div class="ir">
-          <span class="k">停車</span><span class="v">免費</span>
+  <div class="flight-card">
+    <div class="flight-top"><span class="flight-num">UA 853 · 回程</span><span class="flight-date">Apr 15 → 17</span></div>
+    <div class="flight-route">
+      <div class="fa"><div class="code">SFO</div><div class="city">舊金山</div><div class="time">11:20 PM</div></div>
+      <div class="fl">
+        <span class="dur">13h 45m</span>
+        <div class="flight-arc-wrap">
+          <svg class="flight-arc" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8,32 Q80,-8 152,32" fill="none" stroke="var(--border)" stroke-width="1.5"/>
+            <path id="arc3" d="M8,32 Q80,-8 152,32" fill="none" stroke="var(--rust)" stroke-width="1.5" stroke-dasharray="200" stroke-dashoffset="200" class="arc-drawn"/>
+            <g id="plane3" style="transform:translate(8px,32px)"><text font-size="10" text-anchor="middle" dominant-baseline="middle" style="user-select:none">✈</text></g>
+          </svg>
         </div>
       </div>
-
-      <div class="info-blk">
-        <div class="info-blk-title">Groveland Airbnb · 4/4 – 4/7</div>
-        <div class="ir">
-          <span class="k">地址</span>
-          <span class="v">
-            19228 Pine Mountain Dr, Groveland, CA 95321
-            <div class="link-row-inline">
-              <a
-                class="lnk lnk-map"
-                href="https://maps.app.goo.gl/7zH8xxmt7T7X2zgh6"
-                target="_blank"
-                >📍 Google Maps</a
-              >
-            </div>
-          </span>
-        </div>
-        <div class="ir">
-          <span class="k">房型</span
-          ><span class="v">2 房 / 2 衛 · 鄰近 Pine Mountain Lake</span>
-        </div>
-        <div class="ir">
-          <span class="k">評分</span><span class="v">★ 4.98 · 223 則評價</span>
-        </div>
-        <div class="ir">
-          <span class="k">入住</span><span class="v">4/4 16:00</span>
-        </div>
-        <div class="ir">
-          <span class="k">退房</span><span class="v">4/7 11:00</span>
-        </div>
-        <div class="ir">
-          <span class="k">附近超市</span
-          ><span class="v">Mar-Val Market · 車程 7 分鐘</span>
-        </div>
-        <div class="ir">
-          <span class="k">注意</span
-          ><span class="v"
-            >Pine Mountain Lake 大門：首次進入需付 $50，之後出入免費</span
-          >
-        </div>
-      </div>
-
-      <div class="info-blk">
-        <div class="info-blk-title">Los Angeles Airbnb · 4/7 – 4/14</div>
-        <div class="ir">
-          <span class="k">地址</span>
-          <span class="v">
-            1126 South Cordova St, Alhambra, CA 91801
-            <div class="link-row-inline">
-              <a
-                class="lnk lnk-map"
-                href="https://maps.google.com/?q=1126+South+Cordova+Street+Alhambra+CA"
-                target="_blank"
-                >📍 Google Maps</a
-              >
-            </div>
-          </span>
-        </div>
-        <div class="ir">
-          <span class="k">房型</span
-          ><span class="v">3 房 / 2 衛 · 8 人 · 近南帕薩迪納</span>
-        </div>
-        <div class="ir">
-          <span class="k">評分</span><span class="v">★ 4.91 · 159 則評價</span>
-        </div>
-      </div>
+      <div class="fa"><div class="code">TPE</div><div class="city">台北</div><div class="time">4:05 AM</div></div>
     </div>
-
-    <!-- BUDGET -->
-    <div id="tab-budget" class="section">
-      <p class="sec-title">費用明細</p>
-      <div class="budget-wrap">
-        <div class="budget-row">
-          <span class="bl">✈️ 機票（5 人）</span
-          ><span class="ba">NT$ 110,435</span>
-        </div>
-        <div class="budget-row">
-          <span class="bl">🚗 租車（Alamo）</span
-          ><span class="ba">NT$ 65,312</span>
-        </div>
-        <div class="budget-row">
-          <span class="bl">🏠 舊金山 Airbnb（4/2–4/4）</span
-          ><span class="ba">NT$ 23,440</span>
-        </div>
-        <div class="budget-row">
-          <span class="bl">🌲 Groveland Airbnb（4/4–4/7）</span
-          ><span class="ba">NT$ 24,294</span>
-        </div>
-        <div class="budget-row">
-          <span class="bl">🌆 洛杉磯 Airbnb（4/7–4/14）</span
-          ><span class="ba">NT$ 26,564</span>
-        </div>
-        <div class="budget-row">
-          <span class="bl">⚾ 棒球票</span><span class="ba">NT$ 21,362</span>
-        </div>
-        <div class="budget-row">
-          <span class="bl">🎡 環球影城</span><span class="ba">TBD</span>
-        </div>
-        <div class="budget-row">
-          <span class="bl">🔬 加州科學院夜間活動</span
-          ><span class="ba">TBD</span>
-        </div>
-        <div class="budget-row">
-          <span class="bl">🏝️ 惡魔島夜間遊覽</span
-          ><span class="ba">$59.65/人</span>
-        </div>
-        <div class="budget-row">
-          <span class="bl">🌿 優勝美地入園費</span><span class="ba">TBD</span>
-        </div>
-        <div class="budget-row">
-          <span class="bl">📋 ESTA &amp; 旅遊保險</span
-          ><span class="ba">TBD</span>
-        </div>
-        <div class="budget-row tot">
-          <span class="bl">目前確認總計</span
-          ><span class="ba">NT$ 271,407+</span>
-        </div>
-      </div>
+    <div class="flight-links">
+      <a class="lnk lnk-flight" href="https://www.flightaware.com/live/flight/UAL853" target="_blank">FlightAware ↗</a>
+      <a class="lnk lnk-flight" href="https://www.flightradar24.com/data/flights/ua853" target="_blank">FlightRadar24 ↗</a>
+      <a class="lnk lnk-ua" href="https://www.united.com/en/us/flightstatus/details/UA853/2026-04-15" target="_blank">United Airlines ↗</a>
     </div>
+  </div>
 
-    <footer>
-      <div class="ft">USA West Coast</div>
-      <div class="fs">2026 年 4 月 2 日 – 4 月 17 日 · 聯合航空</div>
-    </footer>
+  <p class="sec-title">行程總覽</p>
+  <div class="route-list">
+    <div class="route-item"><span class="ri-date">4/2–4/4</span><span class="ri-dot rust"></span><span class="ri-text">San Francisco</span></div>
+    <div class="route-item"><span class="ri-date">4/4</span><span class="ri-dot rust"></span><span class="ri-text">San Jose → Livermore → Groveland</span></div>
+    <div class="route-item"><span class="ri-date">4/5–4/6</span><span class="ri-dot sky"></span><span class="ri-text">Yosemite National Park</span></div>
+    <div class="route-item"><span class="ri-date">4/7</span><span class="ri-dot rust"></span><span class="ri-text">Groveland → Fresno → Los Angeles</span></div>
+    <div class="route-item"><span class="ri-date">4/7–4/14</span><span class="ri-dot rust"></span><span class="ri-text">Los Angeles · Alhambra</span></div>
+    <div class="route-item"><span class="ri-date">4/15</span><span class="ri-dot rust"></span><span class="ri-text">LA → SEA → SFO → TPE</span></div>
+  </div>
+</div>
 
-    <script>
-      // ── TAB SWITCHING ──
-      document.querySelectorAll('.nav-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const tab = btn.dataset.tab;
-          document
-            .querySelectorAll('.nav-btn')
-            .forEach((b) => b.classList.remove('active'));
-          document
-            .querySelectorAll('.section')
-            .forEach((s) => s.classList.remove('active'));
-          btn.classList.add('active');
-          document.getElementById('tab-' + tab).classList.add('active');
-          if (tab === 'overview') animateAllPlanes();
-        });
-      });
+<!-- DAYS -->
+<div id="tab-days" class="section">
+  <div id="dayList"></div>
+</div>
 
-      // ── PLANE ANIMATION ──
-      // Animates a plane along a quadratic bezier arc path
-      function animatePlane(arcId, planeId, duration, delay) {
-        const arc = document.getElementById(arcId);
-        const plane = document.getElementById(planeId);
-        if (!arc || !plane) return;
+<!-- STAYS -->
+<div id="tab-stays" class="section">
+  <p class="sec-title">租車資訊</p>
+  <div class="info-blk">
+    <div class="info-blk-title">Alamo · Chrysler Pacifica Minivan</div>
+    <div class="ir"><span class="k">確認碼</span><span class="v">1594262100</span></div>
+    <div class="ir"><span class="k">取車</span><span class="v">Apr 2 · 9:00 AM · SFO</span></div>
+    <div class="ir"><span class="k">還車</span><span class="v">Apr 15 · 6:00 PM · SEA</span></div>
+    <div class="ir"><span class="k">車款</span><span class="v">自排 · 7 座 · 5 件行李</span></div>
+    <div class="ir"><span class="k">附加駕駛</span><span class="v">翁慕雲（已包含）</span></div>
+    <div class="ir"><span class="k">包含</span><span class="v">損害免責 · 補充責任保障 · 道路救援加強版</span></div>
+    <div class="ir"><span class="k">總費用</span><span class="v" style="color:var(--rust);font-weight:500">TWD 65,312 (≈ USD $2,046)</span></div>
+  </div>
 
-        // Reset arc draw
-        arc.style.transition = 'none';
-        arc.style.strokeDashoffset = '200';
-        void arc.getBoundingClientRect();
-        setTimeout(() => {
-          arc.style.transition = `stroke-dashoffset ${duration}ms ease-in-out`;
-          arc.style.strokeDashoffset = '0';
-        }, delay);
+  <p class="sec-title">住宿</p>
 
-        // Animate plane along the bezier
-        // arc1 & arc3: Q control point at (80, -8 or -8), end at (152,32)
-        // arc2: Q control point at (80, 4), end at (152,28) — shorter arc
-        const paths = {
-          arc1: [8, 32, 80, -8, 152, 32],
-          arc2: [8, 28, 80, 4, 152, 28],
-          arc3: [8, 32, 80, -8, 152, 32],
-        };
-        const pts = paths[arcId];
-        if (!pts) return;
-        const [x0, y0, cx, cy, x1, y1] = pts;
-        const steps = 80;
-        const stepDuration = duration / steps;
-        let step = 0;
+  <div class="info-blk">
+    <div class="info-blk-title">San Francisco Airbnb · 4/2 – 4/4</div>
+    <div class="ir"><span class="k">房東</span><span class="v">Joyce Chan · 1-510-509-5348</span></div>
+    <div class="ir"><span class="k">地址</span><span class="v">1563 27th Ave, San Francisco, CA 94122<div class="link-row-inline"><a class="lnk lnk-map" href="https://maps.app.goo.gl/fJPS7K7AF9QiK67b9" target="_blank">📍 Google Maps</a></div></span></div>
+    <div class="ir"><span class="k">房型</span><span class="v">2 房 / 2 衛 · 8 人 · Golden Gate Park 旁</span></div>
+    <div class="ir"><span class="k">評分</span><span class="v">★ 4.98 · 173 則評價</span></div>
+    <div class="ir"><span class="k">入住</span><span class="v">15:00（可 11:10 先放行李）</span></div>
+    <div class="ir"><span class="k">停車</span><span class="v">免費</span></div>
+  </div>
 
-        setTimeout(() => {
-          const interval = setInterval(() => {
-            const t = step / steps;
-            // Quadratic bezier position
-            const bx =
-              (1 - t) * (1 - t) * x0 + 2 * (1 - t) * t * cx + t * t * x1;
-            const by =
-              (1 - t) * (1 - t) * y0 + 2 * (1 - t) * t * cy + t * t * y1;
-            // Tangent angle
-            const dx = 2 * (1 - t) * (cx - x0) + 2 * t * (x1 - cx);
-            const dy = 2 * (1 - t) * (cy - y0) + 2 * t * (y1 - cy);
-            const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
-            plane.setAttribute(
-              'transform',
-              `translate(${bx},${by}) rotate(${angle})`,
-            );
-            step++;
-            if (step > steps) clearInterval(interval);
-          }, stepDuration);
-        }, delay);
-      }
+  <div class="info-blk">
+    <div class="info-blk-title">Groveland Airbnb · 4/4 – 4/7</div>
+    <div class="ir"><span class="k">地址</span><span class="v">19228 Pine Mountain Dr, Groveland, CA 95321<div class="link-row-inline"><a class="lnk lnk-map" href="https://maps.app.goo.gl/7zH8xxmt7T7X2zgh6" target="_blank">📍 Google Maps</a></div></span></div>
+    <div class="ir"><span class="k">房型</span><span class="v">2 房 / 2 衛 · 鄰近 Pine Mountain Lake</span></div>
+    <div class="ir"><span class="k">評分</span><span class="v">★ 4.98 · 223 則評價</span></div>
+    <div class="ir"><span class="k">入住</span><span class="v">4/4 16:00</span></div>
+    <div class="ir"><span class="k">退房</span><span class="v">4/7 11:00</span></div>
+    <div class="ir"><span class="k">附近超市</span><span class="v">Mar-Val Market · 車程 7 分鐘</span></div>
+    <div class="ir"><span class="k">注意</span><span class="v">Pine Mountain Lake 大門：首次進入需付 $50，之後出入免費</span></div>
+  </div>
 
-      function animateAllPlanes() {
-        animatePlane('arc1', 'plane1', 2500, 300);
-        animatePlane('arc2', 'plane2', 2500, 600);
-        animatePlane('arc3', 'plane3', 2500, 900);
-      }
+  <div class="info-blk">
+    <div class="info-blk-title">Los Angeles Airbnb · 4/7 – 4/14</div>
+    <div class="ir"><span class="k">地址</span><span class="v">1126 South Cordova St, Alhambra, CA 91801<div class="link-row-inline"><a class="lnk lnk-map" href="https://maps.google.com/?q=1126+South+Cordova+Street+Alhambra+CA" target="_blank">📍 Google Maps</a></div></span></div>
+    <div class="ir"><span class="k">房型</span><span class="v">3 房 / 2 衛 · 8 人 · 近 South Pasadena</span></div>
+    <div class="ir"><span class="k">評分</span><span class="v">★ 4.91 · 159 則評價</span></div>
+  </div>
+</div>
 
-      // Run on load
-      window.addEventListener('load', () => setTimeout(animateAllPlanes, 500));
+<!-- BUDGET -->
+<div id="tab-budget" class="section">
+  <p class="sec-title">費用明細</p>
+  <div class="budget-wrap">
+    <div class="budget-row"><span class="bl">✈️ 機票（5 人）</span><span class="ba">NT$ 110,435</span></div>
+    <div class="budget-row"><span class="bl">🚗 租車（Alamo）</span><span class="ba">NT$ 65,312</span></div>
+    <div class="budget-row"><span class="bl">🏠 SF Airbnb（4/2–4/4）</span><span class="ba">NT$ 23,440</span></div>
+    <div class="budget-row"><span class="bl">🌲 Groveland Airbnb（4/4–4/7）</span><span class="ba">NT$ 24,294</span></div>
+    <div class="budget-row"><span class="bl">🌆 LA Airbnb（4/7–4/14）</span><span class="ba">NT$ 26,564</span></div>
+    <div class="budget-row"><span class="bl">⚾ 棒球票</span><span class="ba">NT$ 21,362</span></div>
+    <div class="budget-row"><span class="bl">🎡 Universal Studios</span><span class="ba">TBD</span></div>
+    <div class="budget-row"><span class="bl">🔬 CA Academy of Sciences NightLife</span><span class="ba">TBD</span></div>
+    <div class="budget-row"><span class="bl">🏝️ Alcatraz Night Tour</span><span class="ba">$59.65/人</span></div>
+    <div class="budget-row"><span class="bl">🌿 Yosemite Entry</span><span class="ba">TBD</span></div>
+    <div class="budget-row"><span class="bl">📋 ESTA &amp; 旅遊保險</span><span class="ba">TBD</span></div>
+    <div class="budget-row tot"><span class="bl">目前確認總計</span><span class="ba">NT$ 271,407+</span></div>
+  </div>
+</div>
 
-      // ── YOSEMITE MAP BUILDER ──
-      // Uses a unique mapId per card to avoid DOM id collisions between Day5 and Day6
-      function buildYosMap(mapId, initDay) {
-        const C1 = '#5ecb70',
-          C2 = '#5bafd4';
+<footer>
+  <div class="ft">USA West Coast</div>
+  <div class="fs">2026 · APR 2 – APR 17 · UNITED AIRLINES</div>
+</footer>
 
-        // Shared valley SVG background (roads, river, terrain) drawn once
-        // Coordinates based on real Yosemite Valley layout:
-        //   West=left (Tunnel View/El Capitan), East=right (Mirror Lake/Half Dome)
-        //   North wall=top, Merced River runs W-E across middle
-        //   Key x positions: TunnelView~30, ElCap~90, YosFalls~185, CurrVillage~255, HalfDome/MirrorLake~310
-        //   Key y positions: north wall edge~55, valley floor~85-165, south wall~175, river~128
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lbImg" src="" alt="" />
+  <div class="lightbox-caption" id="lbCaption"></div>
+</div>
 
-        const svgBg = `
-    <defs>
-      <filter id="gl_${mapId}">
-        <feGaussianBlur stdDeviation="2.5" result="b"/>
-        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-      <linearGradient id="valGrad_${mapId}" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#0e1f10"/>
-        <stop offset="40%" stop-color="#1b3020"/>
-        <stop offset="100%" stop-color="#0e1f10"/>
-      </linearGradient>
-    </defs>
-
-    <!-- Base -->
-    <rect width="360" height="210" fill="url(#valGrad_${mapId})"/>
-
-    <!-- North cliff face (El Capitan side / north valley wall) -->
-    <path d="M0,0 L0,58 Q15,48 30,52 Q50,56 65,45 Q80,34 95,42 Q115,50 130,40 Q150,30 165,38 Q182,46 200,36 Q218,26 235,34 Q255,42 270,32 Q290,20 310,28 Q330,36 350,28 L360,30 L360,0 Z"
-      fill="#0c1a0e" opacity="0.95"/>
-    <!-- North wall texture line -->
-    <path d="M0,58 Q30,52 65,45 Q100,38 130,40 Q162,42 200,36 Q240,30 275,32 Q310,34 360,28"
-      fill="none" stroke="#2a4a2e" stroke-width="1" opacity="0.6"/>
-
-    <!-- South cliff face -->
-    <path d="M0,210 L0,172 Q20,168 40,174 Q60,180 80,170 Q100,160 120,166 Q140,172 160,164 Q180,156 200,162 Q220,168 240,158 Q260,148 280,155 Q300,162 320,155 Q340,148 360,154 L360,210 Z"
-      fill="#0c1a0e" opacity="0.95"/>
-
-    <!-- Valley meadow floor -->
-    <rect x="0" y="58" width="360" height="114" fill="#1e3a22" opacity="0.5"/>
-
-    <!-- Merced River - runs east-west across valley floor -->
-    <path d="M0,128 Q40,122 80,130 Q120,138 165,132 Q205,126 245,130 Q285,134 320,128 Q345,124 360,126"
-      fill="none" stroke="#1a3d6a" stroke-width="5" opacity="0.55"/>
-    <path d="M0,128 Q40,122 80,130 Q120,138 165,132 Q205,126 245,130 Q285,134 320,128 Q345,124 360,126"
-      fill="none" stroke="#4a8fbd" stroke-width="2" opacity="0.5"/>
-
-    <!-- Northside Drive (upper road) -->
-    <path d="M0,100 Q60,96 120,98 Q185,100 240,96 Q295,92 360,90"
-      fill="none" stroke="#5a5a3a" stroke-width="2" stroke-dasharray="8,4" opacity="0.55"/>
-    <!-- Southside Drive (lower road) -->
-    <path d="M0,158 Q60,162 120,160 Q185,158 240,162 Q295,166 360,162"
-      fill="none" stroke="#5a5a3a" stroke-width="2" stroke-dasharray="8,4" opacity="0.55"/>
-
-    <!-- Happy Isles connector road (east) -->
-    <path d="M295,155 Q300,145 298,132 Q296,118 292,108"
-      fill="none" stroke="#5a5a3a" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.45"/>
-
-    <!-- Mist Trail path (faint, shown always) -->
-    <path d="M292,108 Q298,90 302,72 Q308,54 312,40"
-      fill="none" stroke="#3a5a3e" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.35"/>
-
-    <!-- Compass rose -->
-    <text x="340" y="198" fill="#3a6040" font-size="8" font-family="monospace" opacity="0.5">N↑</text>
-    <!-- West label -->
-    <text x="4" y="135" fill="#2a4a2e" font-size="5.5" font-family="monospace" opacity="0.6">W</text>
-    <!-- East label -->
-    <text x="350" y="135" fill="#2a4a2e" font-size="5.5" font-family="monospace" opacity="0.6">E</text>
-  `;
-
-        // Day 1 route: Yosemite Falls → Valley Chapel → El Capitan Picnic → Bridalveil → Tunnel View
-        // Drawn west-to-east then back west: Falls(185,88) → Chapel(183,148) → ElCapPicnic(115,148) → Bridalveil(62,166) → TunnelView(28,100)
-        const day1 = `
-    <g id="yD1_${mapId}">
-      <!-- Route path -->
-      <path id="yT1_${mapId}"
-        d="M185,88 Q184,110 183,128 Q183,140 183,148
-           Q155,148 135,148 Q122,148 115,148
-           Q95,155 80,160 Q68,165 62,166
-           Q45,162 34,148 Q26,130 28,116 Q28,108 28,100"
-        fill="none" stroke="${C1}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"
-        opacity="0" filter="url(#gl_${mapId})"/>
-      <!-- Spots: ① Yosemite Falls Trail -->
-      <g id="yS1_1_${mapId}" opacity="0">
-        <circle cx="185" cy="88" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/>
-        <circle cx="185" cy="88" r="3" fill="white"/>
-        <rect x="152" y="74" width="68" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="186" y="83" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">① Falls Trail</text>
-      </g>
-      <!-- ② Valley Chapel -->
-      <g id="yS1_2_${mapId}" opacity="0">
-        <circle cx="183" cy="148" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/>
-        <circle cx="183" cy="148" r="3" fill="white"/>
-        <rect x="148" y="154" width="70" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="183" y="163" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">② Valley Chapel</text>
-      </g>
-      <!-- ③ El Capitan Picnic -->
-      <g id="yS1_3_${mapId}" opacity="0">
-        <circle cx="115" cy="148" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/>
-        <circle cx="115" cy="148" r="3" fill="white"/>
-        <rect x="72" y="154" width="88" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="116" y="163" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">③ El Cap Picnic 🧺</text>
-      </g>
-      <!-- ④ Bridalveil Fall -->
-      <g id="yS1_4_${mapId}" opacity="0">
-        <circle cx="62" cy="166" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/>
-        <circle cx="62" cy="166" r="3" fill="white"/>
-        <rect x="24" y="154" width="75" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="62" y="163" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">④ Bridalveil Fall</text>
-      </g>
-      <!-- ⑤ Tunnel View (sunset) -->
-      <g id="yS1_5_${mapId}" opacity="0">
-        <circle cx="28" cy="100" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/>
-        <circle cx="28" cy="100" r="3" fill="white"/>
-        <rect x="10" y="86" width="82" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="51" y="95" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">⑤ Tunnel View 🌅</text>
-      </g>
-    </g>`;
-
-        // Day 2 route: Happy Isles → Vernal Fall → Nevada Fall (Mist Trail), then Stoneman Meadow, Mirror Lake
-        // Happy Isles(292,148) → Vernal(300,92) → Nevada(310,42)
-        // Also: Curry Village(248,110) → Stoneman Meadow(218,148) → Mirror Lake(318,110)
-        const day2 = `
-    <g id="yD2_${mapId}" style="display:none">
-      <!-- Mist Trail route -->
-      <path id="yT2_${mapId}"
-        d="M292,148 Q294,128 296,112 Q298,96 300,92
-           Q304,70 308,56 Q310,48 310,42
-           M248,110 Q260,128 275,140 Q284,146 292,148
-           M218,148 Q235,148 255,148 Q272,148 280,148 Q285,148 292,148
-           M292,148 Q305,138 312,126 Q318,118 318,110"
-        fill="none" stroke="${C2}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"
-        opacity="0" filter="url(#gl_${mapId})"/>
-      <!-- ① Curry Village / Start -->
-      <g id="yS2_1_${mapId}" opacity="0">
-        <circle cx="248" cy="110" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/>
-        <circle cx="248" cy="110" r="3" fill="white"/>
-        <rect x="208" y="96" width="80" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="248" y="105" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">① Curry Village 🍕</text>
-      </g>
-      <!-- ② Happy Isles (Mist Trail start) -->
-      <g id="yS2_2_${mapId}" opacity="0">
-        <circle cx="292" cy="148" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/>
-        <circle cx="292" cy="148" r="3" fill="white"/>
-        <rect x="255" y="154" width="74" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="292" y="163" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">② Happy Isles 🚌</text>
-      </g>
-      <!-- ③ Vernal Fall -->
-      <g id="yS2_3_${mapId}" opacity="0">
-        <circle cx="300" cy="92" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/>
-        <circle cx="300" cy="92" r="3" fill="white"/>
-        <rect x="258" y="78" width="82" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="299" y="87" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">③ Vernal Fall 💦</text>
-      </g>
-      <!-- ④ Nevada Fall -->
-      <g id="yS2_4_${mapId}" opacity="0">
-        <circle cx="310" cy="42" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/>
-        <circle cx="310" cy="42" r="3" fill="white"/>
-        <rect x="268" y="28" width="82" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="309" y="37" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">④ Nevada Fall 💦</text>
-      </g>
-      <!-- ⑤ Stoneman Meadow -->
-      <g id="yS2_5_${mapId}" opacity="0">
-        <circle cx="218" cy="148" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/>
-        <circle cx="218" cy="148" r="3" fill="white"/>
-        <rect x="174" y="154" width="90" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="219" y="163" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">⑤ Stoneman Meadow</text>
-      </g>
-      <!-- ⑥ Mirror Lake -->
-      <g id="yS2_6_${mapId}" opacity="0">
-        <circle cx="318" cy="110" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/>
-        <circle cx="318" cy="110" r="3" fill="white"/>
-        <rect x="278" y="96" width="78" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="317" y="105" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">⑥ Mirror Lake 🪞</text>
-      </g>
-    </g>`;
-
-        return `
-  <div class="yos-wrap" id="yosWrap_${mapId}">
-    <div class="yos-header">
-      <span class="yos-title">🗺 Yosemite Valley</span>
-      <div class="yos-tabs">
-        <button class="yos-tab ${initDay === 1 ? 'active' : ''}" onclick="yosSwitch('${mapId}',1,this)">Day 5</button>
-        <button class="yos-tab ${initDay === 2 ? 'active' : ''}" onclick="yosSwitch('${mapId}',2,this)">Day 6</button>
-      </div>
-    </div>
-    <div class="yos-svg-wrap">
-      <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
-        ${svgBg}
-        ${day1}
-        ${day2}
-      </svg>
-    </div>
-    <div class="yos-legend">
-      <div class="yos-leg"><div class="yos-leg-dot" style="background:${C1}"></div>第 5 天 · 山谷步道</div>
-      <div class="yos-leg"><div class="yos-leg-dot" style="background:${C2}"></div>第 6 天 · 迷霧步道</div>
-      <div class="yos-leg" style="color:#3a6040">- - - 道路 / 步道</div>
-    </div>
-  </div>`;
-      }
-
-      // ── ANIMATION ENGINE ──
-      function yosAnimate(mapId, dayNum) {
-        const trailEl = document.getElementById('yT' + dayNum + '_' + mapId);
-        if (!trailEl) return;
-
-        // Reset trail
-        const len = trailEl.getTotalLength ? trailEl.getTotalLength() : 900;
-        trailEl.style.transition = 'none';
-        trailEl.style.strokeDasharray = len;
-        trailEl.style.strokeDashoffset = len;
-        trailEl.style.opacity = '0.85';
-        void trailEl.getBoundingClientRect();
-        trailEl.style.transition = 'stroke-dashoffset 3s ease-in-out';
-        trailEl.style.strokeDashoffset = '0';
-
-        // Reset & animate spots
-        const spotCount = dayNum === 1 ? 5 : 6;
-        for (let i = 1; i <= spotCount; i++) {
-          const sp = document.getElementById(
-            'yS' + dayNum + '_' + i + '_' + mapId,
-          );
-          if (!sp) continue;
-          sp.style.transition = 'none';
-          sp.style.opacity = '0';
-          sp.style.transform = 'scale(0)';
-          void sp.getBoundingClientRect();
-          const delay = 800 + i * 400;
-          setTimeout(() => {
-            sp.style.transition =
-              'opacity 0.3s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1)';
-            sp.style.opacity = '1';
-            sp.style.transform = 'scale(1)';
-          }, delay);
-        }
-      }
-
-      function yosSwitch(mapId, dayNum, btn) {
-        // Update tab buttons
-        const wrap = document.getElementById('yosWrap_' + mapId);
-        wrap
-          .querySelectorAll('.yos-tab')
-          .forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-        // Toggle layers
-        const d1 = document.getElementById('yD1_' + mapId);
-        const d2 = document.getElementById('yD2_' + mapId);
-        if (dayNum === 1) {
-          d1.style.display = 'block';
-          d2.style.display = 'none';
-        } else {
-          d1.style.display = 'none';
-          d2.style.display = 'block';
-        }
-        yosAnimate(mapId, dayNum);
-      }
-
-      // ── DAY DATA ──
-      const days = [
-        {
-          num: '2',
-          sub: '舊金山抵達',
-          desc: 'SFO 抵達 → 金門公園一帶',
-          tl: [
-            {
-              t: '6:30',
-              dot: 'rust',
-              n: '抵達 SFO（UA 872）',
-              d: '舊金山國際機場',
-              mapUrl:
-                'https://maps.google.com/?q=San+Francisco+International+Airport',
-            },
-            {
-              t: '9:00',
-              dot: 'rust',
-              n: 'Alamo 取租車',
-              d: 'SFO 租車櫃台',
-              tag: '租車',
-              mapUrl: 'https://maps.google.com/?q=Alamo+Car+Rental+SFO',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '早午餐',
-              tag: '餐飲',
-              food: [
-                {
-                  label: 'A. In-N-Out Burger',
-                  mapUrl:
-                    'https://maps.google.com/?q=In-N-Out+Burger+South+San+Francisco',
-                },
-                {
-                  label: 'B. Taqueria San Bruno',
-                  mapUrl: 'https://maps.google.com/?q=Taqueria+San+Bruno+CA',
-                },
-              ],
-            },
-            {
-              t: '11:10',
-              dot: 'sky',
-              n: 'Airbnb 寄放行李',
-              d: '1563 27th Ave · 金門公園旁',
-              tag: '住宿',
-              mapUrl: 'https://maps.app.goo.gl/fJPS7K7AF9QiK67b9',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '下午景點',
-              places: [
-                {
-                  label: 'Warming Hut',
-                  mapUrl: 'https://maps.google.com/?q=Warming+Hut+Crissy+Field',
-                },
-                {
-                  label: 'Golden Gate Bridge',
-                  mapUrl: 'https://maps.google.com/?q=Golden+Gate+Bridge',
-                },
-                {
-                  label: 'Palace of Fine Arts',
-                  mapUrl:
-                    'https://maps.google.com/?q=Palace+of+Fine+Arts+San+Francisco',
-                },
-                {
-                  label: 'Baker Beach',
-                  mapUrl: 'https://maps.app.goo.gl/79aUouVrJa4c4coU6',
-                },
-              ],
-            },
-            {
-              t: '15:00',
-              dot: 'sky',
-              n: 'Airbnb 入住',
-              d: 'Joyce Chan · 1563 27th Ave',
-              tag: '住宿',
-              mapUrl: 'https://maps.app.goo.gl/fJPS7K7AF9QiK67b9',
-            },
-            {
-              t: '18:00',
-              dot: 'rust',
-              n: '加州科學院夜間活動',
-              d: '週四限定！ 18:00–22:00',
-              tag: '活動',
-              mapUrl:
-                'https://maps.google.com/?q=California+Academy+of+Sciences',
-              webUrl: 'https://www.calacademy.org/nightlife',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '晚餐 · 自煮',
-              tag: '餐飲',
-              food: [
-                {
-                  label: 'Safeway 超市',
-                  mapUrl: 'https://maps.app.goo.gl/BgtNRyLagVRuY2Jv5',
-                },
-                {
-                  label: '22nd & Irving 市場',
-                  mapUrl: 'https://maps.app.goo.gl/osprNdVqmmDozaM98',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          num: '3',
-          sub: '舊金山第 2 天',
-          desc: '漁人碼頭 · 纜車 · 聯合廣場',
-          tl: [
-            {
-              t: '',
-              dot: 'rust',
-              n: 'Lombard Street',
-              d: 'The crookedest street',
-              mapUrl: 'https://maps.google.com/?q=Lombard+Street+San+Francisco',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: "Fisherman's Wharf",
-              d: 'Parking ~$10/h',
-              mapUrl:
-                'https://maps.google.com/?q=Fishermans+Wharf+San+Francisco',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: '39 號碼頭',
-              d: '海獅 & 商店',
-              mapUrl: 'https://maps.google.com/?q=Pier+39+San+Francisco',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: 'Boudin 麵包店',
-              d: '蛤蜊巧達湯麵包碗',
-              mapUrl:
-                'https://maps.google.com/?q=Boudin+Bakery+Fishermans+Wharf',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '午餐',
-              tag: '餐飲',
-              food: [
-                {
-                  label: 'A. Sotto Mare（電話預約）',
-                  mapUrl: 'https://maps.google.com/?q=Sotto+Mare+San+Francisco',
-                },
-                {
-                  label: 'B. Golden Boy Pizza（外帶）',
-                  mapUrl:
-                    'https://maps.google.com/?q=Golden+Boy+Pizza+San+Francisco',
-                },
-              ],
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: 'Union Square Garage',
-              d: '$6/h · max $40',
-              mapUrl:
-                'https://maps.google.com/?q=Union+Square+Garage+San+Francisco',
-              webUrl: 'https://www.sfmta.com/garages-lots/union-square-garage',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: 'Cable Car',
-              d: 'Powell St turnaround · $8/person',
-              mapUrl:
-                'https://maps.google.com/?q=Powell+Street+Cable+Car+Turnaround',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: '任天堂舊金山旗艦店',
-              d: '聯合廣場',
-              mapUrl: 'https://maps.google.com/?q=Nintendo+San+Francisco',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: 'Biscoff 咖啡角',
-              d: 'California St & Powell St 觀景點',
-              mapUrl:
-                'https://maps.google.com/?q=Biscoff+Coffee+Corner+San+Francisco',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: '吉哈德利巧克力',
-              d: '舊金山經典必去',
-              mapUrl:
-                'https://maps.google.com/?q=Ghirardelli+Chocolate+San+Francisco',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '彩色小姐',
-              d: '明信片排屋',
-              mapUrl: 'https://maps.google.com/?q=Painted+Ladies+San+Francisco',
-            },
-            {
-              t: '18:00',
-              dot: 'rust',
-              n: '惡魔島夜間遊覽',
-              d: '$59.65/人 · 渡輪：17:55 / 18:30 / 19:05',
-              tag: '活動',
-              mapUrl:
-                'https://maps.google.com/?q=Alcatraz+Island+San+Francisco',
-              webUrl:
-                'https://www.cityexperiences.com/san-francisco/city-cruises/alcatraz/departure-schedule/',
-            },
-            { t: '', dot: 'gray', n: '晚餐 · 自煮', tag: '餐飲' },
-          ],
-        },
-        {
-          num: '4',
-          sub: '科技公司巡禮 → Groveland',
-          desc: '聖荷西 · 利佛摩 · Groveland',
-          tl: [
-            {
-              t: '9:00',
-              dot: 'rust',
-              n: 'Google 訪客中心',
-              d: 'Mountain View',
-              tag: '活動',
-              mapUrl: 'https://maps.app.goo.gl/3z6GsD1H5nM7WzcK9',
-            },
-            {
-              t: '10:00',
-              dot: 'rust',
-              n: 'Apple Park 訪客中心',
-              d: 'Vision Pro 體驗預約',
-              tag: '活動',
-              mapUrl:
-                'https://maps.google.com/?q=Apple+Park+Visitor+Center+Cupertino',
-              webUrl: 'https://www.apple.com/retail/appleparkvisitorcenter/',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '午餐',
-              tag: '餐飲',
-              food: [
-                {
-                  label: 'A. PHỞ HÀ NỘI SAN JOSE',
-                  mapUrl: 'https://maps.google.com/?q=Pho+Ha+Noi+San+Jose',
-                },
-                {
-                  label: 'B. 美國飯',
-                  mapUrl: 'https://maps.app.goo.gl/G5nTMX4ShQN7C4ds7',
-                },
-              ],
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: '舊金山暢貨中心',
-              d: 'Livermore · 購物',
-              mapUrl: 'https://maps.app.goo.gl/G5nTMX4ShQN7C4ds7',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: '前往 Groveland',
-              d: '約 2 小時 3 分鐘 · 走 CA-120',
-            },
-            {
-              t: '16:00',
-              dot: 'sky',
-              n: 'Groveland Airbnb 入住',
-              d: '19228 Pine Mountain Dr',
-              tag: '住宿',
-              mapUrl: 'https://maps.app.goo.gl/7zH8xxmt7T7X2zgh6',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: 'Note',
-              d: 'Pine Mountain Lake Gate · $50 first entry · Mar-Val Market nearby',
-              mapUrl: 'https://maps.app.goo.gl/osprNdVqmmDozaM98',
-            },
-          ],
-        },
-        {
-          num: '5',
-          sub: '優勝美地第 1 天',
-          desc: '山谷步道 · 船長岩 · 新娘面紗瀑布 · 隧道景觀台',
-          yosDay: 1,
-          tl: [
-            {
-              t: '',
-              dot: 'rust',
-              n: '下優勝美地瀑布步道',
-              d: '約 1 小時',
-              tag: '健行',
-              mapUrl: 'https://maps.google.com/?q=Lower+Yosemite+Falls+Trail',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '優勝美地山谷教堂',
-              d: '歷史古蹟小教堂',
-              mapUrl: 'https://maps.google.com/?q=Yosemite+Valley+Chapel',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '廚師草甸環形步道',
-              d: '可眺望半圓頂與優勝美地瀑布',
-              mapUrl: 'https://maps.google.com/?q=Cooks+Meadow+Loop+Yosemite',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: '船長岩野餐區 🧺',
-              d: '仰望船長岩',
-              tag: '餐飲',
-              mapUrl:
-                'https://maps.google.com/?q=El+Capitan+Picnic+Area+Yosemite',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: '新娘面紗瀑布',
-              d: '約 40 分鐘',
-              mapUrl: 'https://maps.google.com/?q=Bridalveil+Fall+Yosemite',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: '隧道景觀台',
-              d: '傍晚日落 · 山谷全景制高點',
-              mapUrl: 'https://maps.google.com/?q=Tunnel+View+Yosemite',
-            },
-          ],
-        },
-        {
-          num: '6',
-          sub: '優勝美地第 2 天',
-          desc: '迷霧步道 · 內華達瀑布 · 鏡湖',
-          yosDay: 2,
-          tl: [
-            {
-              t: '',
-              dot: 'rust',
-              n: '迷霧步道 + 約翰繆爾步道',
-              d: '春瀑布 + 內華達瀑布 · 約 6 小時',
-              tag: '健行',
-              mapUrl: 'https://maps.google.com/?q=Mist+Trail+Yosemite',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '接駁巴士 · 免費',
-              d: '優勝美地山谷接駁系統',
-              webUrl:
-                'https://www.nps.gov/yose/planyourvisit/valleyshuttle.htm',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '午餐 / 晚餐',
-              tag: '餐飲',
-              food: [
-                {
-                  label: 'Curry Village 披薩露台',
-                  mapUrl:
-                    'https://maps.google.com/?q=Half+Dome+Village+Pizza+Deck+Yosemite',
-                },
-              ],
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: '半圓頂觀景點',
-              d: '搭接駁車前往',
-              mapUrl: 'https://maps.google.com/?q=Half+Dome+Yosemite',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: '史東曼草甸',
-              d: '開闊草原景色',
-              mapUrl: 'https://maps.google.com/?q=Stoneman+Meadow+Yosemite',
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: '鏡湖',
-              d: '半圓頂倒影',
-              mapUrl: 'https://maps.google.com/?q=Mirror+Lake+Yosemite',
-            },
-          ],
-        },
-        {
-          num: '7',
-          sub: 'Groveland → 洛杉磯',
-          desc: '車程約 6 小時，途經 Fresno 和 Bakersfield',
-          tl: [
-            {
-              t: '',
-              dot: 'rust',
-              n: 'Pine Mountain Lake',
-              d: '早晨散步',
-              mapUrl:
-                'https://maps.google.com/?q=Pine+Mountain+Lake+Groveland+CA',
-            },
-            { t: '11:00', dot: 'sky', n: 'Groveland Airbnb 退房', tag: '住宿' },
-            { t: '', dot: 'rust', n: '前往 Fresno', d: '約 2 小時 18 分鐘' },
-            {
-              t: '',
-              dot: 'gray',
-              n: '午餐（Fresno）',
-              tag: '餐飲',
-              food: [{ label: 'TBD' }],
-            },
-            {
-              t: '',
-              dot: 'rust',
-              n: 'Bakersfield',
-              d: '約 1 小時 34 分鐘 · 休息站',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '晚餐',
-              tag: '餐飲',
-              food: [{ label: 'TBD' }],
-            },
-            {
-              t: '',
-              dot: 'sky',
-              n: '抵達洛杉磯 Airbnb',
-              d: '1126 South Cordova St, Alhambra CA',
-              tag: '住宿',
-              mapUrl:
-                'https://maps.google.com/?q=1126+South+Cordova+Street+Alhambra+CA',
-            },
-          ],
-        },
-        {
-          num: '8–11',
-          sub: '洛杉磯',
-          desc: '以 Alhambra 為據點 · 行程待定',
-          tl: [
-            {
-              t: '',
-              dot: 'sky',
-              n: '洛杉磯 Airbnb',
-              d: '1126 South Cordova St',
-              tag: '住宿',
-              mapUrl:
-                'https://maps.google.com/?q=1126+South+Cordova+Street+Alhambra+CA',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '行程待定',
-              d: '環球影城 · 好萊塢 · 海灘 · 更多',
-            },
-            {
-              t: '',
-              dot: 'gray',
-              n: '美式連鎖餐廳',
-              tag: '餐飲',
-              food: [
-                { label: 'In-N-Out' },
-                { label: "Raising Cane's" },
-                { label: 'Chick-fil-A' },
-                { label: 'Five Guys' },
-                { label: 'Jollibee' },
-                { label: 'Panda Express' },
-                { label: 'Texas Roadhouse' },
-                { label: 'Chipotle' },
-                { label: "Carl's Jr." },
-                { label: "Wendy's" },
-              ],
-            },
-          ],
-        },
-        {
-          num: '15',
-          sub: '出發返台',
-          desc: '洛杉磯 → 西雅圖 → 舊金山 → 台北',
-          tl: [
-            {
-              t: '18:00',
-              dot: 'rust',
-              n: 'SEA 還車',
-              d: '西雅圖塔科馬機場 · Alamo',
-              mapUrl:
-                'https://maps.google.com/?q=Seattle+Tacoma+International+Airport',
-            },
-            {
-              t: '19:37',
-              dot: 'rust',
-              n: 'UA 737 西雅圖出發',
-              d: '西雅圖 → 舊金山 · 抵達 21:50',
-            },
-            {
-              t: '23:20',
-              dot: 'rust',
-              n: 'UA 853 舊金山出發',
-              d: '舊金山 → 台北 · 飛行 13 小時 45 分鐘',
-            },
-          ],
-        },
-      ];
-
-      // ── BUILD DAY CARDS ──
-      const dayList = document.getElementById('dayList');
-      days.forEach((day, idx) => {
-        const card = document.createElement('div');
-        card.className = 'day-card';
-        const mapId = 'map_' + idx; // unique per card, NO id collision
-
-        let body = '';
-        if (day.yosDay) body += buildYosMap(mapId, day.yosDay);
-        body += '<div class="tl">';
-
-        day.tl.forEach((item) => {
-          const dotCls =
-            item.dot === 'sky' ? 'sky' : item.dot === 'gray' ? 'gray' : '';
-          body += `<div class="tl-item">
-      <div class="tl-time">${item.t || ''}</div>
-      <div class="tl-dot ${dotCls}"></div>
-      <div class="tl-con"><div class="tl-name">${item.n}</div>`;
-          if (item.d) body += `<div class="tl-detail">${item.d}</div>`;
-          if (item.tag) {
-            const tc =
-              item.tag === 'Food' || item.tag === '餐飲'
-                ? 'food'
-                : item.tag === 'Stay' || item.tag === '住宿'
-                  ? 'stay'
-                  : '';
-            body += `<span class="tl-tag ${tc}">${item.tag}</span>`;
-          }
-          const links = [];
-          if (item.mapUrl)
-            links.push(
-              `<a class="lnk lnk-map" href="${item.mapUrl}" target="_blank">📍 Maps</a>`,
-            );
-          if (item.webUrl)
-            links.push(
-              `<a class="lnk lnk-web" href="${item.webUrl}" target="_blank">🔗 Website</a>`,
-            );
-          if (links.length)
-            body += `<div class="link-row">${links.join('')}</div>`;
-          if (item.food) {
-            body += `<div class="food-opts">`;
-            item.food.forEach((f) => {
-              if (f.mapUrl)
-                body += `<a class="food-opt lnk-food" href="${f.mapUrl}" target="_blank" style="text-decoration:none">${f.label} 📍</a>`;
-              else body += `<span class="food-opt">${f.label || f}</span>`;
-            });
-            body += `</div>`;
-          }
-          if (item.places) {
-            body += `<div class="places"><div class="places-lbl">📍 Spots</div><div class="chips">`;
-            item.places.forEach((p) => {
-              if (p.mapUrl)
-                body += `<a class="chip" href="${p.mapUrl}" target="_blank" style="text-decoration:none">${p.label}</a>`;
-              else body += `<span class="chip">${p.label || p}</span>`;
-            });
-            body += `</div></div>`;
-          }
-          body += `</div></div>`;
-        });
-        body += '</div>';
-
-        card.innerHTML = `
-    <div class="day-header">
-      <div class="day-date-box"><div class="dm">APR</div><div class="dn">${day.num}</div></div>
-      <div class="day-info">
-        <div class="day-title">${day.sub}</div>
-        <div class="day-sub">${day.desc}</div>
-      </div>
-      <div class="day-chev">▶</div>
-    </div>
-    <div class="day-body">${body}</div>`;
-
-        card.querySelector('.day-header').addEventListener('click', () => {
-          const wasOpen = card.classList.contains('open');
-          card.classList.toggle('open');
-          if (!wasOpen && day.yosDay) {
-            // Small delay so display:block is rendered before we measure path length
-            setTimeout(() => yosAnimate(mapId, day.yosDay), 120);
-          }
-        });
-        dayList.appendChild(card);
-      });
-    </script>
-  </body>
+<!-- Load data first, then app logic -->
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
 </html>

@@ -1,7 +1,8 @@
 // ── PASSWORD PROTECTION ──
-// SHA-256 hash
-// echo -n "MY_PASSWORD" | shasum -a 256
-const PASSWORD_HASH = '2612d391c1eb9a05beb967f1f2adaf215a544bd5e2d88d2a13c531e56af493a6';
+// 6-digit SHA-256 hash — to update: echo -n "NEW_PASS" | shasum -a 256
+const PASSWORD_HASH = 'ccea9d43e047284f4fc886c6504f88f192c53b8480863486222efcfbebae8f7e';
+const MAX_ATTEMPTS = 5;
+const LOCKOUT_SECONDS = 30;
 
 async function hashInput(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
@@ -12,25 +13,46 @@ function initPasswordProtection() {
   const inputs = document.querySelectorAll('.password-input');
   const errorMsg = document.getElementById('passwordError');
   const lock = document.getElementById('passwordLock');
+  // 用 localStorage 存鎖定狀態，刷新頁面也不會消失
+  function getAttempts() { return parseInt(localStorage.getItem('pw_attempts') || '0'); }
+  function getLockUntil() { return parseInt(localStorage.getItem('pw_lock_until') || '0'); }
+  function saveAttempts(n) { localStorage.setItem('pw_attempts', n); }
+  function saveLockUntil(ts) { localStorage.setItem('pw_lock_until', ts); }
+  function resetLock() { localStorage.removeItem('pw_attempts'); localStorage.removeItem('pw_lock_until'); }
+
+  let lockTimer = null;
+
+  function startLockCountdown() {
+    inputs.forEach(i => { i.disabled = true; i.value = ''; });
+    lockTimer = setInterval(() => {
+      const remaining = Math.ceil((getLockUntil() - Date.now()) / 1000);
+      if (remaining <= 0) {
+        clearInterval(lockTimer);
+        resetLock();
+        inputs.forEach(i => i.disabled = false);
+        errorMsg.textContent = '';
+        inputs[0].focus();
+      } else {
+        errorMsg.textContent = `已鎖定，請等待 ${remaining} 秒`;
+      }
+    }, 1000);
+  }
+
+  // 頁面載入時檢查是否仍在鎖定中
+  if (getLockUntil() > Date.now()) {
+    startLockCountdown();
+  }
 
   inputs.forEach((input, idx) => {
     input.addEventListener('input', (e) => {
       e.target.value = e.target.value.replace(/[^0-9]/g, '');
       errorMsg.textContent = '';
-
-      if (e.target.value && idx < inputs.length - 1) {
-        inputs[idx + 1].focus();
-      }
-
-      if (idx === inputs.length - 1 && e.target.value) {
-        checkPassword();
-      }
+      if (e.target.value && idx < inputs.length - 1) inputs[idx + 1].focus();
+      if (idx === inputs.length - 1 && e.target.value) checkPassword();
     });
 
     input.addEventListener('keydown', (e) => {
-      if (e.key === 'Backspace' && !input.value && idx > 0) {
-        inputs[idx - 1].focus();
-      }
+      if (e.key === 'Backspace' && !input.value && idx > 0) inputs[idx - 1].focus();
     });
   });
 
@@ -38,12 +60,20 @@ function initPasswordProtection() {
     const password = Array.from(inputs).map(i => i.value).join('');
     const hash = await hashInput(password);
     if (hash === PASSWORD_HASH) {
+      resetLock();
       lock.classList.add('unlocked');
       setTimeout(() => { lock.style.display = 'none'; }, 500);
     } else {
-      errorMsg.textContent = '密碼錯誤，請重試';
+      const attempts = getAttempts() + 1;
+      saveAttempts(attempts);
       inputs.forEach(i => i.value = '');
-      inputs[0].focus();
+      if (attempts >= MAX_ATTEMPTS) {
+        saveLockUntil(Date.now() + LOCKOUT_SECONDS * 1000);
+        startLockCountdown();
+      } else {
+        errorMsg.textContent = `密碼錯誤，還剩 ${MAX_ATTEMPTS - attempts} 次機會`;
+        inputs[0].focus();
+      }
     }
   }
 

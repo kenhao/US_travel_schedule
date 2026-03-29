@@ -427,7 +427,7 @@ const days = [
   {
     num: '15',
     sub: '返台',
-    desc: 'LA → Seattle → SFO → Taipei',
+    desc: 'Seattle → SFO → Taipei',
     tl: [
       {
         t: '18:00', dot: 'rust',

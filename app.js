@@ -1,6 +1,9 @@
 // ── PASSWORD PROTECTION ──
-// Correct password: 1234 (可自行修改)
-const CORRECT_PASSWORD = '1234';
+// 密碼從 config.js 讀取，如果未找到則使用空密碼（禁用保護）
+// Password is loaded from config.js; if not found, protection is disabled
+const CORRECT_PASSWORD = (typeof PASSWORD_CONFIG !== 'undefined' && PASSWORD_CONFIG.password)
+  ? PASSWORD_CONFIG.password
+  : '';
 
 function initPasswordProtection() {
   const inputs = document.querySelectorAll('.password-input');

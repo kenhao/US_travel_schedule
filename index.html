@@ -1548,6 +1548,8 @@
 
     <!-- Load data first, then app logic -->
     <script src="data.js"></script>
+    <!-- Load config (password) - optional, user must create this file -->
+    <script src="config.js" onerror="console.warn('config.js not found - using defaults')"></script>
     <script src="app.js"></script>
   </body>
 </html>

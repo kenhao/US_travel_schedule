@@ -32,3 +32,6 @@ logs/
 *.tmp
 .cache/
 
+# Password configuration (never commit)
+config.js
+

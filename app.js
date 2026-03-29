@@ -1,3 +1,62 @@
+// ── PASSWORD PROTECTION ──
+// SHA-256 hash
+// echo -n "MY_PASSWORD" | shasum -a 256
+const PASSWORD_HASH = '2612d391c1eb9a05beb967f1f2adaf215a544bd5e2d88d2a13c531e56af493a6';
+
+async function hashInput(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function initPasswordProtection() {
+  const inputs = document.querySelectorAll('.password-input');
+  const errorMsg = document.getElementById('passwordError');
+  const lock = document.getElementById('passwordLock');
+
+  inputs.forEach((input, idx) => {
+    input.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+      errorMsg.textContent = '';
+
+      if (e.target.value && idx < inputs.length - 1) {
+        inputs[idx + 1].focus();
+      }
+
+      if (idx === inputs.length - 1 && e.target.value) {
+        checkPassword();
+      }
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !input.value && idx > 0) {
+        inputs[idx - 1].focus();
+      }
+    });
+  });
+
+  async function checkPassword() {
+    const password = Array.from(inputs).map(i => i.value).join('');
+    const hash = await hashInput(password);
+    if (hash === PASSWORD_HASH) {
+      lock.classList.add('unlocked');
+      setTimeout(() => { lock.style.display = 'none'; }, 500);
+    } else {
+      errorMsg.textContent = '密碼錯誤，請重試';
+      inputs.forEach(i => i.value = '');
+      inputs[0].focus();
+    }
+  }
+
+  inputs[0].focus();
+}
+
+// 等待 DOM 載入完成
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPasswordProtection);
+} else {
+  initPasswordProtection();
+}
+
 // ── TAB SWITCHING ──
 document.querySelectorAll('.nav-btn').forEach((btn) => {
   btn.addEventListener('click', () => {

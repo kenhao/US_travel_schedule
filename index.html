@@ -201,6 +201,74 @@
         border-bottom-color: var(--rust);
       }
 
+      /* ── PASSWORD LOCK ── */
+      .password-lock {
+        position: fixed;
+        inset: 0;
+        background: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      .password-lock.unlocked {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .password-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 320px;
+      }
+      .password-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--cream);
+        text-align: center;
+      }
+      .password-subtitle {
+        font-size: 0.85rem;
+        color: var(--sand);
+        text-align: center;
+      }
+      .password-input-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+      }
+      .password-input {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-align: center;
+        border: 2px solid var(--sand);
+        background: transparent;
+        color: var(--cream);
+        border-radius: 4px;
+        font-family: 'DM Mono', monospace;
+        letter-spacing: 0.1em;
+        transition: border-color 0.2s ease;
+      }
+      .password-input:focus {
+        outline: none;
+        border-color: var(--rust);
+      }
+      .password-input::placeholder {
+        color: var(--muted);
+      }
+      .password-error {
+        color: #ff6b6b;
+        font-size: 0.8rem;
+        text-align: center;
+        min-height: 1.2rem;
+      }
+
       /* ── SECTIONS ── */
       .section {
         display: none;
@@ -932,6 +1000,21 @@
     </style>
   </head>
   <body>
+    <!-- PASSWORD LOCK -->
+    <div class="password-lock" id="passwordLock">
+      <div class="password-container">
+        <h2 class="password-title">Access Required</h2>
+        <p class="password-subtitle">請輸入四位數密碼</p>
+        <div class="password-input-group" id="passwordInputGroup">
+          <input type="text" class="password-input" id="pwd0" maxlength="1" placeholder="•" inputmode="numeric" />
+          <input type="text" class="password-input" id="pwd1" maxlength="1" placeholder="•" inputmode="numeric" />
+          <input type="text" class="password-input" id="pwd2" maxlength="1" placeholder="•" inputmode="numeric" />
+          <input type="text" class="password-input" id="pwd3" maxlength="1" placeholder="•" inputmode="numeric" />
+        </div>
+        <div class="password-error" id="passwordError"></div>
+      </div>
+    </div>
+
     <!-- HERO -->
     <section class="hero">
       <div class="hero-bg"></div>

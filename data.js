@@ -53,8 +53,8 @@ const days = [
         ],
         imgs: [
           { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GoldenGateBridge-001.jpg/600px-GoldenGateBridge-001.jpg', cap: 'Golden Gate Bridge' },
-          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Palace_of_Fine_Arts%2C_San_Francisco%2C_California%2C_USA.jpg/600px-Palace_of_Fine_Arts%2C_San_Francisco%2C_California%2C_USA.jpg', cap: 'Palace of Fine Arts' },
-          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Baker_Beach_with_Golden_Gate.jpg/600px-Baker_Beach_with_Golden_Gate.jpg', cap: 'Baker Beach' },
+          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Palace_of_Fine_Arts_SF_CA.jpg/600px-Palace_of_Fine_Arts_SF_CA.jpg', cap: 'Palace of Fine Arts' },
+          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Baker_Beach_in_San_Francisco_100_3976.JPG/600px-Baker_Beach_in_San_Francisco_100_3976.JPG', cap: 'Baker Beach' },
         ],
       },
       {
@@ -72,7 +72,7 @@ const days = [
         mapUrl: 'https://maps.google.com/?q=California+Academy+of+Sciences',
         webUrl: 'https://www.calacademy.org/nightlife',
         img: {
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/California_Academy_of_Sciences_May_2019.jpg/600px-California_Academy_of_Sciences_May_2019.jpg',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/CaliforniaAcademyofSciences.jpg/600px-CaliforniaAcademyofSciences.jpg',
           caption: 'California Academy of Sciences',
         },
       },
@@ -102,7 +102,7 @@ const days = [
         n: 'Lombard Street',
         d: '全美最彎曲街道',
         mapUrl: 'https://maps.google.com/?q=Lombard+Street+San+Francisco',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Lombard_Street%2C_SF.jpg/600px-Lombard_Street%2C_SF.jpg', caption: 'Lombard Street' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Full_view_of_crooked_Lombard_Street%2C_SF_%28Feb_2006%29.jpg/600px-Full_view_of_crooked_Lombard_Street%2C_SF_%28Feb_2006%29.jpg', caption: 'Lombard Street' },
       },
       {
         t: '', dot: 'rust',
@@ -116,7 +116,7 @@ const days = [
         n: 'Pier 39',
         d: '海獅 & 商店',
         mapUrl: 'https://maps.google.com/?q=Pier+39+San+Francisco',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Pier_39_-_San_Francisco%2C_CA_-_panoramio.jpg/600px-Pier_39_-_San_Francisco%2C_CA_-_panoramio.jpg', caption: 'Pier 39' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/California%2C_San_Francisco%2C_Pier_39%2C_sea_lions.jpg/600px-California%2C_San_Francisco%2C_Pier_39%2C_sea_lions.jpg', caption: 'Pier 39' },
       },
       {
         t: '', dot: 'rust',
@@ -145,7 +145,7 @@ const days = [
         n: 'Cable Car',
         d: 'Powell St 終點站 · $8/人',
         mapUrl: 'https://maps.google.com/?q=Powell+Street+Cable+Car+Turnaround',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Cable_car_on_Powell_Street.jpg/600px-Cable_car_on_Powell_Street.jpg', caption: 'Cable Car on Powell Street' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Powell_Street%2C_San_Francisco%2C_California.jpg/600px-Powell_Street%2C_San_Francisco%2C_California.jpg', caption: 'Cable Car on Powell Street' },
       },
       {
         t: '', dot: 'rust',
@@ -170,7 +170,7 @@ const days = [
         n: 'Painted Ladies',
         d: '明信片排屋',
         mapUrl: 'https://maps.google.com/?q=Painted+Ladies+San+Francisco',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Painted_ladies_sf.jpg/600px-Painted_ladies_sf.jpg', caption: 'Painted Ladies' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/The_Painted_Ladies.jpg/600px-The_Painted_Ladies.jpg', caption: 'Painted Ladies' },
       },
       {
         t: '18:00', dot: 'rust',
@@ -179,7 +179,7 @@ const days = [
         tag: '活動',
         mapUrl: 'https://maps.google.com/?q=Alcatraz+Island+San+Francisco',
         webUrl: 'https://www.cityexperiences.com/san-francisco/city-cruises/alcatraz/departure-schedule/',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Alcatraz_Island_photo_D_Ramey_Logan.jpg/600px-Alcatraz_Island_photo_D_Ramey_Logan.jpg', caption: 'Alcatraz Island' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Alcatraz_Island_as_seen_from_the_East.jpg/600px-Alcatraz_Island_as_seen_from_the_East.jpg', caption: 'Alcatraz Island' },
       },
       { t: '', dot: 'gray', n: 'Dinner — Cook at Home', tag: '餐飲' },
     ],
@@ -200,7 +200,7 @@ const days = [
         d: 'Mountain View',
         tag: '活動',
         mapUrl: 'https://maps.app.goo.gl/3z6GsD1H5nM7WzcK9',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Googleplex_HQ_%28cropped%29.jpg/600px-Googleplex_HQ_%28cropped%29.jpg', caption: 'Google HQ' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Google_Campus2_cropped.jpg/600px-Google_Campus2_cropped.jpg', caption: 'Google HQ' },
       },
       {
         t: '10:00', dot: 'rust',
@@ -209,7 +209,7 @@ const days = [
         tag: '活動',
         mapUrl: 'https://maps.google.com/?q=Apple+Park+Visitor+Center+Cupertino',
         webUrl: 'https://www.apple.com/retail/appleparkvisitorcenter/',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Apple_Park_aerial_photo.jpg/600px-Apple_Park_aerial_photo.jpg', caption: 'Apple Park' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Aerial_view_of_Apple_Park_dllu.jpg/600px-Aerial_view_of_Apple_Park_dllu.jpg', caption: 'Apple Park' },
       },
       {
         t: '', dot: 'gray',
@@ -253,7 +253,7 @@ const days = [
     desc: 'Valley Loop · El Capitan · Bridalveil Fall · Tunnel View',
     yosDay: 1,
     cover: {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tunnel_View%2C_Yosemite_Valley%2C_California_%28USA%29_-_panoramio.jpg/1200px-Tunnel_View%2C_Yosemite_Valley%2C_California_%28USA%29_-_panoramio.jpg',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg/1200px-Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg',
       caption: 'Tunnel View · Yosemite Valley',
     },
     tl: [
@@ -263,7 +263,7 @@ const days = [
         d: '約 1 小時',
         tag: '健行',
         mapUrl: 'https://maps.google.com/?q=Lower+Yosemite+Falls+Trail',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Yosemite_Falls_from_valley_floor.jpg/600px-Yosemite_Falls_from_valley_floor.jpg', caption: 'Yosemite Falls' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Yosemite_Falls_-_Yosemite_National_Park%2C_California%2C_USA_-_August_1995.jpg/600px-Yosemite_Falls_-_Yosemite_National_Park%2C_California%2C_USA_-_August_1995.jpg', caption: 'Yosemite Falls' },
       },
       {
         t: '', dot: 'gray',
@@ -283,21 +283,21 @@ const days = [
         d: '仰望 El Capitan · 野餐 🧺',
         tag: '餐飲',
         mapUrl: 'https://maps.google.com/?q=El+Capitan+Picnic+Area+Yosemite',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Nose_El_Capitan_Yosemite_National_Park.jpg/600px-The_Nose_El_Capitan_Yosemite_National_Park.jpg', caption: 'El Capitan' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/El_Capitan_Granite_%28mid-Cretaceous%2C_103_Ma%3B_El_Capitan%2C_Yosemite_Valley%2C_Sierra_Nevada_Mountains%2C_California%2C_USA%29_1.jpg/600px-El_Capitan_Granite_%28mid-Cretaceous%2C_103_Ma%3B_El_Capitan%2C_Yosemite_Valley%2C_Sierra_Nevada_Mountains%2C_California%2C_USA%29_1.jpg', caption: 'El Capitan' },
       },
       {
         t: '', dot: 'rust',
         n: 'Bridalveil Fall',
         d: '約 40 分鐘',
         mapUrl: 'https://maps.google.com/?q=Bridalveil+Fall+Yosemite',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Bridalveil_fall_yosemite_tunnel_view.jpg/600px-Bridalveil_fall_yosemite_tunnel_view.jpg', caption: 'Bridalveil Fall' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Bridalveil_Falls_08183.JPG/600px-Bridalveil_Falls_08183.JPG', caption: 'Bridalveil Fall' },
       },
       {
         t: '', dot: 'rust',
         n: 'Tunnel View',
         d: '傍晚日落 · 山谷全景制高點',
         mapUrl: 'https://maps.google.com/?q=Tunnel+View+Yosemite',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tunnel_View%2C_Yosemite_Valley%2C_California_%28USA%29_-_panoramio.jpg/600px-Tunnel_View%2C_Yosemite_Valley%2C_California_%28USA%29_-_panoramio.jpg', caption: 'Tunnel View at sunset' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg/600px-Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg', caption: 'Tunnel View at sunset' },
       },
     ],
   },
@@ -308,7 +308,7 @@ const days = [
     desc: 'Mist Trail · Nevada Fall · Mirror Lake',
     yosDay: 2,
     cover: {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Vernal_fall_from_footbridge.JPG/1200px-Vernal_fall_from_footbridge.JPG',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Vernal_Fall_08776.JPG/1200px-Vernal_Fall_08776.JPG',
       caption: 'Vernal Fall · Mist Trail',
     },
     tl: [
@@ -319,8 +319,8 @@ const days = [
         tag: '健行',
         mapUrl: 'https://maps.google.com/?q=Mist+Trail+Yosemite',
         imgs: [
-          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Vernal_fall_from_footbridge.JPG/600px-Vernal_fall_from_footbridge.JPG', cap: 'Vernal Fall' },
-          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Nevada_Fall_from_Panorama_Trail.jpg/600px-Nevada_Fall_from_Panorama_Trail.jpg', cap: 'Nevada Fall' },
+          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Vernal_Fall_08776.JPG/600px-Vernal_Fall_08776.JPG', cap: 'Vernal Fall' },
+          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Nevada_Fall%2C_Yosemite_NP%2C_CA%2C_US_-_Diliff.jpg/600px-Nevada_Fall%2C_Yosemite_NP%2C_CA%2C_US_-_Diliff.jpg', cap: 'Nevada Fall' },
         ],
       },
       {
@@ -342,7 +342,7 @@ const days = [
         n: 'Half Dome Viewpoint',
         d: '搭接駁車前往',
         mapUrl: 'https://maps.google.com/?q=Half+Dome+Yosemite',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg/600px-Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg', caption: 'Half Dome' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Yosemite_National_Park_spans_eastern_portions_of_Tuolumne%2C_Mariposa_and_Madera_counties_in_California_LCCN2013635054.tif/lossy-page1-600px-Yosemite_National_Park_spans_eastern_portions_of_Tuolumne%2C_Mariposa_and_Madera_counties_in_California_LCCN2013635054.tif.jpg', caption: 'Half Dome' },
       },
       {
         t: '', dot: 'rust',
@@ -355,7 +355,7 @@ const days = [
         n: 'Mirror Lake',
         d: 'Half Dome 倒影',
         mapUrl: 'https://maps.google.com/?q=Mirror+Lake+Yosemite',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Mirror_Lake_Yosemite_April_2013.jpg/600px-Mirror_Lake_Yosemite_April_2013.jpg', caption: 'Mirror Lake' },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Yosemite_National_Park_%28CA%2C_USA%29%2C_Yosemite_Valley%2C_Mirror_Lake_--_2022_--_2807.jpg/600px-Yosemite_National_Park_%28CA%2C_USA%29%2C_Yosemite_Valley%2C_Mirror_Lake_--_2022_--_2807.jpg', caption: 'Mirror Lake' },
       },
     ],
   },
@@ -391,7 +391,7 @@ const days = [
     sub: '洛杉磯',
     desc: 'Alhambra Base · TBD',
     cover: {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Hollywood_Sign.jpg/1200px-Hollywood_Sign.jpg',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Hollywood_Sign_%28Zuschnitt%29.jpg/1200px-Hollywood_Sign_%28Zuschnitt%29.jpg',
       caption: 'Hollywood Sign · Los Angeles',
     },
     tl: [
@@ -407,8 +407,8 @@ const days = [
         n: 'Activities TBD',
         d: '環球影城 · 好萊塢 · 海灘 · 更多',
         imgs: [
-          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Hollywood_Sign.jpg/600px-Hollywood_Sign.jpg', cap: 'Hollywood Sign' },
-          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Santa_Monica_Pier_at_dusk.jpg/600px-Santa_Monica_Pier_at_dusk.jpg', cap: 'Santa Monica Pier' },
+          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Hollywood_Sign_%28Zuschnitt%29.jpg/600px-Hollywood_Sign_%28Zuschnitt%29.jpg', cap: 'Hollywood Sign' },
+          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Santa_Monica_Pier_Sunset.jpg/600px-Santa_Monica_Pier_Sunset.jpg', cap: 'Santa Monica Pier' },
         ],
       },
       {

@@ -1,9 +1,12 @@
 // ── PASSWORD PROTECTION ──
-// 密碼從 config.js 讀取，如果未找到則使用空密碼（禁用保護）
-// Password is loaded from config.js; if not found, protection is disabled
-const CORRECT_PASSWORD = (typeof PASSWORD_CONFIG !== 'undefined' && PASSWORD_CONFIG.password)
-  ? PASSWORD_CONFIG.password
-  : '';
+// 儲存的是密碼的 SHA-256 hash，不是明文密碼
+// 要更改密碼：執行 echo -n "你的密碼" | shasum -a 256，然後更新下面的 hash
+const PASSWORD_HASH = '2612d391c1eb9a05beb967f1f2adaf215a544bd5e2d88d2a13c531e56af493a6';
+
+async function hashInput(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
 function initPasswordProtection() {
   const inputs = document.querySelectorAll('.password-input');
@@ -12,24 +15,18 @@ function initPasswordProtection() {
 
   inputs.forEach((input, idx) => {
     input.addEventListener('input', (e) => {
-      // 只允許數字
       e.target.value = e.target.value.replace(/[^0-9]/g, '');
-
-      // 清除錯誤信息
       errorMsg.textContent = '';
 
-      // 移動到下一個輸入框
       if (e.target.value && idx < inputs.length - 1) {
         inputs[idx + 1].focus();
       }
 
-      // 自動檢查密碼
       if (idx === inputs.length - 1 && e.target.value) {
         checkPassword();
       }
     });
 
-    // 允許退格刪除
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Backspace' && !input.value && idx > 0) {
         inputs[idx - 1].focus();
@@ -37,13 +34,12 @@ function initPasswordProtection() {
     });
   });
 
-  function checkPassword() {
+  async function checkPassword() {
     const password = Array.from(inputs).map(i => i.value).join('');
-    if (password === CORRECT_PASSWORD) {
+    const hash = await hashInput(password);
+    if (hash === PASSWORD_HASH) {
       lock.classList.add('unlocked');
-      setTimeout(() => {
-        lock.style.display = 'none';
-      }, 500);
+      setTimeout(() => { lock.style.display = 'none'; }, 500);
     } else {
       errorMsg.textContent = '密碼錯誤，請重試';
       inputs.forEach(i => i.value = '');
@@ -51,7 +47,6 @@ function initPasswordProtection() {
     }
   }
 
-  // 初始焦點
   inputs[0].focus();
 }
 

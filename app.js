@@ -1,6 +1,6 @@
 // ── PASSWORD PROTECTION ──
-// 儲存的是密碼的 SHA-256 hash，不是明文密碼
-// 要更改密碼：執行 echo -n "你的密碼" | shasum -a 256，然後更新下面的 hash
+// SHA-256 hash
+// echo -n "MY_PASSWORD" | shasum -a 256
 const PASSWORD_HASH = '2612d391c1eb9a05beb967f1f2adaf215a544bd5e2d88d2a13c531e56af493a6';
 
 async function hashInput(str) {

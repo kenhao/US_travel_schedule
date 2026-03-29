@@ -1,3 +1,64 @@
+// ── PASSWORD PROTECTION ──
+// Correct password: 1234 (可自行修改)
+const CORRECT_PASSWORD = '1234';
+
+function initPasswordProtection() {
+  const inputs = document.querySelectorAll('.password-input');
+  const errorMsg = document.getElementById('passwordError');
+  const lock = document.getElementById('passwordLock');
+
+  inputs.forEach((input, idx) => {
+    input.addEventListener('input', (e) => {
+      // 只允許數字
+      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+
+      // 清除錯誤信息
+      errorMsg.textContent = '';
+
+      // 移動到下一個輸入框
+      if (e.target.value && idx < inputs.length - 1) {
+        inputs[idx + 1].focus();
+      }
+
+      // 自動檢查密碼
+      if (idx === inputs.length - 1 && e.target.value) {
+        checkPassword();
+      }
+    });
+
+    // 允許退格刪除
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !input.value && idx > 0) {
+        inputs[idx - 1].focus();
+      }
+    });
+  });
+
+  function checkPassword() {
+    const password = Array.from(inputs).map(i => i.value).join('');
+    if (password === CORRECT_PASSWORD) {
+      lock.classList.add('unlocked');
+      setTimeout(() => {
+        lock.style.display = 'none';
+      }, 500);
+    } else {
+      errorMsg.textContent = '密碼錯誤，請重試';
+      inputs.forEach(i => i.value = '');
+      inputs[0].focus();
+    }
+  }
+
+  // 初始焦點
+  inputs[0].focus();
+}
+
+// 等待 DOM 載入完成
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPasswordProtection);
+} else {
+  initPasswordProtection();
+}
+
 // ── TAB SWITCHING ──
 document.querySelectorAll('.nav-btn').forEach((btn) => {
   btn.addEventListener('click', () => {

@@ -190,7 +190,7 @@ const days = [
     sub: '科技巡禮 → Groveland',
     desc: 'San Jose · Livermore · Groveland',
     cover: {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Apple_Park_aerial_photo.jpg/1200px-Apple_Park_aerial_photo.jpg',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Aerial_view_of_Apple_Park_dllu.jpg/1200px-Aerial_view_of_Apple_Park_dllu.jpg',
       caption: 'Apple Park · Cupertino',
     },
     tl: [

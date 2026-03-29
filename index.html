@@ -210,7 +210,9 @@
         align-items: center;
         justify-content: center;
         z-index: 9999;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+        transition:
+          opacity 0.5s ease,
+          visibility 0.5s ease;
       }
       .password-lock.unlocked {
         opacity: 0;
@@ -1004,14 +1006,56 @@
     <div class="password-lock" id="passwordLock">
       <div class="password-container">
         <h2 class="password-title">Access Required</h2>
-        <p class="password-subtitle">請輸入四位數密碼</p>
+        <p class="password-subtitle">請輸入六位數密碼</p>
         <div class="password-input-group" id="passwordInputGroup">
-          <input type="text" class="password-input" id="pwd0" maxlength="1" placeholder="•" inputmode="numeric" />
-          <input type="text" class="password-input" id="pwd1" maxlength="1" placeholder="•" inputmode="numeric" />
-          <input type="text" class="password-input" id="pwd2" maxlength="1" placeholder="•" inputmode="numeric" />
-          <input type="text" class="password-input" id="pwd3" maxlength="1" placeholder="•" inputmode="numeric" />
-          <input type="text" class="password-input" id="pwd4" maxlength="1" placeholder="•" inputmode="numeric" />
-          <input type="text" class="password-input" id="pwd5" maxlength="1" placeholder="•" inputmode="numeric" />
+          <input
+            type="text"
+            class="password-input"
+            id="pwd0"
+            maxlength="1"
+            placeholder="•"
+            inputmode="numeric"
+          />
+          <input
+            type="text"
+            class="password-input"
+            id="pwd1"
+            maxlength="1"
+            placeholder="•"
+            inputmode="numeric"
+          />
+          <input
+            type="text"
+            class="password-input"
+            id="pwd2"
+            maxlength="1"
+            placeholder="•"
+            inputmode="numeric"
+          />
+          <input
+            type="text"
+            class="password-input"
+            id="pwd3"
+            maxlength="1"
+            placeholder="•"
+            inputmode="numeric"
+          />
+          <input
+            type="text"
+            class="password-input"
+            id="pwd4"
+            maxlength="1"
+            placeholder="•"
+            inputmode="numeric"
+          />
+          <input
+            type="text"
+            class="password-input"
+            id="pwd5"
+            maxlength="1"
+            placeholder="•"
+            inputmode="numeric"
+          />
         </div>
         <div class="password-error" id="passwordError"></div>
       </div>

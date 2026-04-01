@@ -1,5 +1,4 @@
 // ── PASSWORD PROTECTION ──
-// 6-digit SHA-256 hash — to update: echo -n "NEW_PASS" | shasum -a 256
 const PASSWORD_HASH = 'ccea9d43e047284f4fc886c6504f88f192c53b8480863486222efcfbebae8f7e';
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_SECONDS = 30;
@@ -13,15 +12,12 @@ function initPasswordProtection() {
   const inputs = document.querySelectorAll('.password-input');
   const errorMsg = document.getElementById('passwordError');
   const lock = document.getElementById('passwordLock');
-  // 用 localStorage 存鎖定狀態，刷新頁面也不會消失
   function getAttempts() { return parseInt(localStorage.getItem('pw_attempts') || '0'); }
   function getLockUntil() { return parseInt(localStorage.getItem('pw_lock_until') || '0'); }
   function saveAttempts(n) { localStorage.setItem('pw_attempts', n); }
   function saveLockUntil(ts) { localStorage.setItem('pw_lock_until', ts); }
   function resetLock() { localStorage.removeItem('pw_attempts'); localStorage.removeItem('pw_lock_until'); }
-
   let lockTimer = null;
-
   function startLockCountdown() {
     inputs.forEach(i => { i.disabled = true; i.value = ''; });
     lockTimer = setInterval(() => {
@@ -37,12 +33,7 @@ function initPasswordProtection() {
       }
     }, 1000);
   }
-
-  // 頁面載入時檢查是否仍在鎖定中
-  if (getLockUntil() > Date.now()) {
-    startLockCountdown();
-  }
-
+  if (getLockUntil() > Date.now()) { startLockCountdown(); }
   inputs.forEach((input, idx) => {
     input.addEventListener('input', (e) => {
       e.target.value = e.target.value.replace(/[^0-9]/g, '');
@@ -50,12 +41,10 @@ function initPasswordProtection() {
       if (e.target.value && idx < inputs.length - 1) inputs[idx + 1].focus();
       if (idx === inputs.length - 1 && e.target.value) checkPassword();
     });
-
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Backspace' && !input.value && idx > 0) inputs[idx - 1].focus();
     });
   });
-
   async function checkPassword() {
     const password = Array.from(inputs).map(i => i.value).join('');
     const hash = await hashInput(password);
@@ -76,11 +65,9 @@ function initPasswordProtection() {
       }
     }
   }
-
   inputs[0].focus();
 }
 
-// 等待 DOM 載入完成
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initPasswordProtection);
 } else {
@@ -118,11 +105,6 @@ function lazyImg(src, className, caption) {
   img.className = className;
   img.alt = caption || '';
   img.onclick = () => openLightbox(src, caption);
-  // Store src for deferred loading — images live inside display:none containers
-  // and browser lazy loading won't trigger for them reliably.
-  // onerror is intentionally NOT set here: Safari fires error on src-less imgs
-  // connected to the DOM, which would permanently hide the element before we
-  // ever get a chance to set the real src.
   img.dataset.lazySrc = src;
   return img;
 }
@@ -132,7 +114,6 @@ function animatePlane(arcId, planeId, duration, delay) {
   const arc = document.getElementById(arcId);
   const plane = document.getElementById(planeId);
   if (!arc || !plane) return;
-
   arc.style.transition = 'none';
   arc.style.strokeDashoffset = '200';
   void arc.getBoundingClientRect();
@@ -140,55 +121,41 @@ function animatePlane(arcId, planeId, duration, delay) {
     arc.style.transition = `stroke-dashoffset ${duration}ms ease-in-out`;
     arc.style.strokeDashoffset = '0';
   }, delay);
-
-  const paths = {
-    arc1: [8, 32, 80, -8, 152, 32],
-    arc2: [8, 28, 80, 4, 152, 28],
-    arc3: [8, 32, 80, -8, 152, 32],
-  };
+  const paths = { arc1:[8,32,80,-8,152,32], arc2:[8,28,80,4,152,28], arc3:[8,32,80,-8,152,32] };
   const pts = paths[arcId];
   if (!pts) return;
-  const [x0, y0, cx, cy, x1, y1] = pts;
+  const [x0,y0,cx,cy,x1,y1] = pts;
   const steps = 80;
   let step = 0;
-
   setTimeout(() => {
     const interval = setInterval(() => {
       const t = step / steps;
-      const bx = (1 - t) * (1 - t) * x0 + 2 * (1 - t) * t * cx + t * t * x1;
-      const by = (1 - t) * (1 - t) * y0 + 2 * (1 - t) * t * cy + t * t * y1;
-      const dx = 2 * (1 - t) * (cx - x0) + 2 * t * (x1 - cx);
-      const dy = 2 * (1 - t) * (cy - y0) + 2 * t * (y1 - cy);
-      const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+      const bx = (1-t)*(1-t)*x0 + 2*(1-t)*t*cx + t*t*x1;
+      const by = (1-t)*(1-t)*y0 + 2*(1-t)*t*cy + t*t*y1;
+      const dx = 2*(1-t)*(cx-x0) + 2*t*(x1-cx);
+      const dy = 2*(1-t)*(cy-y0) + 2*t*(y1-cy);
+      const angle = (Math.atan2(dy,dx)*180)/Math.PI;
       plane.setAttribute('transform', `translate(${bx},${by}) rotate(${angle})`);
       step++;
       if (step > steps) clearInterval(interval);
-    }, duration / steps);
+    }, duration/steps);
   }, delay);
 }
-
 function animateAllPlanes() {
-  animatePlane('arc1', 'plane1', 2500, 300);
-  animatePlane('arc2', 'plane2', 2500, 600);
-  animatePlane('arc3', 'plane3', 2500, 900);
+  animatePlane('arc1','plane1',2500,300);
+  animatePlane('arc2','plane2',2500,600);
+  animatePlane('arc3','plane3',2500,900);
 }
-
 window.addEventListener('load', () => setTimeout(animateAllPlanes, 500));
 
 // ── YOSEMITE MAP ──
 function buildYosMap(mapId, initDay) {
   const C1 = '#5ecb70', C2 = '#5bafd4';
-
   const svgBg = `
     <defs>
-      <filter id="gl_${mapId}">
-        <feGaussianBlur stdDeviation="2.5" result="b"/>
-        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
+      <filter id="gl_${mapId}"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       <linearGradient id="valGrad_${mapId}" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#0e1f10"/>
-        <stop offset="40%" stop-color="#1b3020"/>
-        <stop offset="100%" stop-color="#0e1f10"/>
+        <stop offset="0%" stop-color="#0e1f10"/><stop offset="40%" stop-color="#1b3020"/><stop offset="100%" stop-color="#0e1f10"/>
       </linearGradient>
     </defs>
     <rect width="360" height="210" fill="url(#valGrad_${mapId})"/>
@@ -206,88 +173,37 @@ function buildYosMap(mapId, initDay) {
     <text x="4" y="135" fill="#2a4a2e" font-size="5.5" font-family="monospace" opacity="0.6">W</text>
     <text x="350" y="135" fill="#2a4a2e" font-size="5.5" font-family="monospace" opacity="0.6">E</text>
   `;
-
   const day1 = `
     <g id="yD1_${mapId}">
       <path id="yT1_${mapId}" d="M185,88 Q184,110 183,128 Q183,140 183,148 Q155,148 135,148 Q122,148 115,148 Q95,155 80,160 Q68,165 62,166 Q45,162 34,148 Q26,130 28,116 Q28,108 28,100"
         fill="none" stroke="${C1}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" opacity="0" filter="url(#gl_${mapId})"/>
-      <g id="yS1_1_${mapId}" opacity="0">
-        <circle cx="185" cy="88" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="185" cy="88" r="3" fill="white"/>
-        <rect x="152" y="74" width="68" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="186" y="83" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">① Falls Trail</text>
-      </g>
-      <g id="yS1_2_${mapId}" opacity="0">
-        <circle cx="183" cy="148" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="183" cy="148" r="3" fill="white"/>
-        <rect x="148" y="154" width="70" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="183" y="163" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">② Valley Chapel</text>
-      </g>
-      <g id="yS1_3_${mapId}" opacity="0">
-        <circle cx="115" cy="148" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="115" cy="148" r="3" fill="white"/>
-        <rect x="72" y="154" width="88" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="116" y="163" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">③ El Cap Picnic</text>
-      </g>
-      <g id="yS1_4_${mapId}" opacity="0">
-        <circle cx="62" cy="166" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="62" cy="166" r="3" fill="white"/>
-        <rect x="24" y="154" width="75" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="62" y="163" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">④ Bridalveil Fall</text>
-      </g>
-      <g id="yS1_5_${mapId}" opacity="0">
-        <circle cx="28" cy="100" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="28" cy="100" r="3" fill="white"/>
-        <rect x="10" y="86" width="82" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="51" y="95" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">⑤ Tunnel View 🌅</text>
-      </g>
+      <g id="yS1_1_${mapId}" opacity="0"><circle cx="185" cy="88" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="185" cy="88" r="3" fill="white"/><rect x="152" y="74" width="68" height="12" rx="2" fill="#0e1f10" opacity="0.75"/><text x="186" y="83" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">① Falls Trail</text></g>
+      <g id="yS1_2_${mapId}" opacity="0"><circle cx="183" cy="148" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="183" cy="148" r="3" fill="white"/><rect x="148" y="154" width="70" height="12" rx="2" fill="#0e1f10" opacity="0.75"/><text x="183" y="163" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">② Valley Chapel</text></g>
+      <g id="yS1_3_${mapId}" opacity="0"><circle cx="115" cy="148" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="115" cy="148" r="3" fill="white"/><rect x="72" y="154" width="88" height="12" rx="2" fill="#0e1f10" opacity="0.75"/><text x="116" y="163" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">③ El Cap Picnic</text></g>
+      <g id="yS1_4_${mapId}" opacity="0"><circle cx="62" cy="166" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="62" cy="166" r="3" fill="white"/><rect x="24" y="154" width="75" height="12" rx="2" fill="#0e1f10" opacity="0.75"/><text x="62" y="163" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">④ Bridalveil Fall</text></g>
+      <g id="yS1_5_${mapId}" opacity="0"><circle cx="28" cy="100" r="6" fill="${C1}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="28" cy="100" r="3" fill="white"/><rect x="10" y="86" width="82" height="12" rx="2" fill="#0e1f10" opacity="0.75"/><text x="51" y="95" fill="${C1}" font-size="6.5" font-family="monospace" text-anchor="middle">⑤ Tunnel View 🌅</text></g>
     </g>`;
-
   const day2 = `
     <g id="yD2_${mapId}" style="display:none">
       <path id="yT2_${mapId}" d="M292,148 Q294,128 296,112 Q298,96 300,92 Q304,70 308,56 Q310,48 310,42 M248,110 Q260,128 275,140 Q284,146 292,148 M218,148 Q235,148 255,148 Q272,148 280,148 Q285,148 292,148 M292,148 Q305,138 312,126 Q318,118 318,110"
         fill="none" stroke="${C2}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" opacity="0" filter="url(#gl_${mapId})"/>
-      <g id="yS2_1_${mapId}" opacity="0">
-        <circle cx="248" cy="110" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="248" cy="110" r="3" fill="white"/>
-        <rect x="208" y="96" width="80" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="248" y="105" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">① Curry Village 🍕</text>
-      </g>
-      <g id="yS2_2_${mapId}" opacity="0">
-        <circle cx="292" cy="148" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="292" cy="148" r="3" fill="white"/>
-        <rect x="255" y="154" width="74" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="292" y="163" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">② Happy Isles 🚌</text>
-      </g>
-      <g id="yS2_3_${mapId}" opacity="0">
-        <circle cx="300" cy="92" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="300" cy="92" r="3" fill="white"/>
-        <rect x="258" y="78" width="82" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="299" y="87" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">③ Vernal Fall 💦</text>
-      </g>
-      <g id="yS2_4_${mapId}" opacity="0">
-        <circle cx="310" cy="42" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="310" cy="42" r="3" fill="white"/>
-        <rect x="268" y="28" width="82" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="309" y="37" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">④ Nevada Fall 💦</text>
-      </g>
-      <g id="yS2_5_${mapId}" opacity="0">
-        <circle cx="218" cy="148" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="218" cy="148" r="3" fill="white"/>
-        <rect x="174" y="154" width="90" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="219" y="163" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">⑤ Stoneman Meadow</text>
-      </g>
-      <g id="yS2_6_${mapId}" opacity="0">
-        <circle cx="318" cy="110" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="318" cy="110" r="3" fill="white"/>
-        <rect x="278" y="96" width="78" height="12" rx="2" fill="#0e1f10" opacity="0.75"/>
-        <text x="317" y="105" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">⑥ Mirror Lake 🪞</text>
-      </g>
+      <g id="yS2_1_${mapId}" opacity="0"><circle cx="248" cy="110" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="248" cy="110" r="3" fill="white"/><rect x="208" y="96" width="80" height="12" rx="2" fill="#0e1f10" opacity="0.75"/><text x="248" y="105" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">① Curry Village 🍕</text></g>
+      <g id="yS2_2_${mapId}" opacity="0"><circle cx="292" cy="148" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="292" cy="148" r="3" fill="white"/><rect x="255" y="154" width="74" height="12" rx="2" fill="#0e1f10" opacity="0.75"/><text x="292" y="163" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">② Happy Isles 🚌</text></g>
+      <g id="yS2_3_${mapId}" opacity="0"><circle cx="300" cy="92" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="300" cy="92" r="3" fill="white"/><rect x="258" y="78" width="82" height="12" rx="2" fill="#0e1f10" opacity="0.75"/><text x="299" y="87" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">③ Vernal Fall 💦</text></g>
+      <g id="yS2_4_${mapId}" opacity="0"><circle cx="310" cy="42" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="310" cy="42" r="3" fill="white"/><rect x="268" y="28" width="82" height="12" rx="2" fill="#0e1f10" opacity="0.75"/><text x="309" y="37" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">④ Nevada Fall 💦</text></g>
+      <g id="yS2_5_${mapId}" opacity="0"><circle cx="218" cy="148" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="218" cy="148" r="3" fill="white"/><rect x="174" y="154" width="90" height="12" rx="2" fill="#0e1f10" opacity="0.75"/><text x="219" y="163" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">⑤ Stoneman Meadow</text></g>
+      <g id="yS2_6_${mapId}" opacity="0"><circle cx="318" cy="110" r="6" fill="${C2}" opacity="0.85" filter="url(#gl_${mapId})"/><circle cx="318" cy="110" r="3" fill="white"/><rect x="278" y="96" width="78" height="12" rx="2" fill="#0e1f10" opacity="0.75"/><text x="317" y="105" fill="${C2}" font-size="6.5" font-family="monospace" text-anchor="middle">⑥ Mirror Lake 🪞</text></g>
     </g>`;
-
   return `
   <div class="yos-wrap" id="yosWrap_${mapId}">
     <div class="yos-header">
       <span class="yos-title">🗺 Yosemite Valley</span>
       <div class="yos-tabs">
-        <button class="yos-tab ${initDay === 1 ? 'active' : ''}" onclick="yosSwitch('${mapId}',1,this)">Day 5</button>
-        <button class="yos-tab ${initDay === 2 ? 'active' : ''}" onclick="yosSwitch('${mapId}',2,this)">Day 6</button>
+        <button class="yos-tab ${initDay===1?'active':''}" onclick="yosSwitch('${mapId}',1,this)">Day 5</button>
+        <button class="yos-tab ${initDay===2?'active':''}" onclick="yosSwitch('${mapId}',2,this)">Day 6</button>
       </div>
     </div>
-    <div class="yos-svg-wrap">
-      <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
-        ${svgBg}${day1}${day2}
-      </svg>
-    </div>
+    <div class="yos-svg-wrap"><svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">${svgBg}${day1}${day2}</svg></div>
     <div class="yos-legend">
       <div class="yos-leg"><div class="yos-leg-dot" style="background:${C1}"></div>Day 5 · Valley Loop</div>
       <div class="yos-leg"><div class="yos-leg-dot" style="background:${C2}"></div>Day 6 · Mist Trail</div>
@@ -297,7 +213,7 @@ function buildYosMap(mapId, initDay) {
 }
 
 function yosAnimate(mapId, dayNum) {
-  const trailEl = document.getElementById('yT' + dayNum + '_' + mapId);
+  const trailEl = document.getElementById('yT'+dayNum+'_'+mapId);
   if (!trailEl) return;
   const len = trailEl.getTotalLength ? trailEl.getTotalLength() : 900;
   trailEl.style.transition = 'none';
@@ -307,28 +223,22 @@ function yosAnimate(mapId, dayNum) {
   void trailEl.getBoundingClientRect();
   trailEl.style.transition = 'stroke-dashoffset 3s ease-in-out';
   trailEl.style.strokeDashoffset = '0';
-  const spotCount = dayNum === 1 ? 5 : 6;
-  for (let i = 1; i <= spotCount; i++) {
-    const sp = document.getElementById('yS' + dayNum + '_' + i + '_' + mapId);
+  const spotCount = dayNum===1?5:6;
+  for (let i=1;i<=spotCount;i++) {
+    const sp = document.getElementById('yS'+dayNum+'_'+i+'_'+mapId);
     if (!sp) continue;
-    sp.style.transition = 'none';
-    sp.style.opacity = '0';
-    sp.style.transform = 'scale(0)';
+    sp.style.transition='none'; sp.style.opacity='0'; sp.style.transform='scale(0)';
     void sp.getBoundingClientRect();
-    setTimeout(() => {
-      sp.style.transition = 'opacity 0.3s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1)';
-      sp.style.opacity = '1';
-      sp.style.transform = 'scale(1)';
-    }, 800 + i * 400);
+    setTimeout(()=>{ sp.style.transition='opacity 0.3s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1)'; sp.style.opacity='1'; sp.style.transform='scale(1)'; }, 800+i*400);
   }
 }
 
 function yosSwitch(mapId, dayNum, btn) {
-  const wrap = document.getElementById('yosWrap_' + mapId);
-  wrap.querySelectorAll('.yos-tab').forEach((b) => b.classList.remove('active'));
+  const wrap = document.getElementById('yosWrap_'+mapId);
+  wrap.querySelectorAll('.yos-tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('yD1_' + mapId).style.display = dayNum === 1 ? 'block' : 'none';
-  document.getElementById('yD2_' + mapId).style.display = dayNum === 2 ? 'block' : 'none';
+  document.getElementById('yD1_'+mapId).style.display = dayNum===1?'block':'none';
+  document.getElementById('yD2_'+mapId).style.display = dayNum===2?'block':'none';
   yosAnimate(mapId, dayNum);
 }
 
@@ -337,117 +247,57 @@ const dayList = document.getElementById('dayList');
 days.forEach((day, idx) => {
   const card = document.createElement('div');
   card.className = 'day-card';
-  const mapId = 'map_' + idx;
-
-  // Build inner HTML
+  const mapId = 'map_'+idx;
   let body = '';
   if (day.yosDay) body += buildYosMap(mapId, day.yosDay);
   body += '<div class="tl">';
-
   day.tl.forEach((item) => {
-    const dotCls = item.dot === 'sky' ? 'sky' : item.dot === 'gray' ? 'gray' : '';
-    body += `<div class="tl-item">
-      <div class="tl-time">${item.t || ''}</div>
-      <div class="tl-dot ${dotCls}"></div>
-      <div class="tl-con"><div class="tl-name">${item.n}</div>`;
-
+    const dotCls = item.dot==='sky'?'sky':item.dot==='gray'?'gray':'';
+    body += `<div class="tl-item"><div class="tl-time">${item.t||''}</div><div class="tl-dot ${dotCls}"></div><div class="tl-con"><div class="tl-name">${item.n}</div>`;
     if (item.d) body += `<div class="tl-detail">${item.d}</div>`;
-
-    if (item.tag) {
-      const tc = item.tag === '餐飲' ? 'food' : item.tag === '住宿' ? 'stay' : '';
-      body += `<span class="tl-tag ${tc}">${item.tag}</span>`;
-    }
-
-    const links = [];
+    if (item.tag) { const tc=item.tag==='餐飲'?'food':item.tag==='住宿'?'stay':''; body += `<span class="tl-tag ${tc}">${item.tag}</span>`; }
+    const links=[];
     if (item.mapUrl) links.push(`<a class="lnk lnk-map" href="${item.mapUrl}" target="_blank">📍 Maps</a>`);
     if (item.webUrl) links.push(`<a class="lnk lnk-web" href="${item.webUrl}" target="_blank">🔗 Website</a>`);
     if (links.length) body += `<div class="link-row">${links.join('')}</div>`;
-
-    if (item.food) {
-      body += `<div class="food-opts">`;
-      item.food.forEach((f) => {
-        if (f.mapUrl) body += `<a class="food-opt" href="${f.mapUrl}" target="_blank">${f.label} 📍</a>`;
-        else body += `<span class="food-opt">${f.label || f}</span>`;
-      });
-      body += `</div>`;
-    }
-
-    if (item.places) {
-      body += `<div class="places"><div class="places-lbl">📍 Spots</div><div class="chips">`;
-      item.places.forEach((p) => {
-        if (p.mapUrl) body += `<a class="chip" href="${p.mapUrl}" target="_blank">${p.label}</a>`;
-        else body += `<span class="chip">${p.label || p}</span>`;
-      });
-      body += `</div></div>`;
-    }
-
-    // Image placeholders — replaced with real DOM nodes below
-    if (item.img) {
-      body += `<div class="spot-img-slot" data-src="${item.img.url}" data-cap="${item.img.caption}"></div>`;
-    }
-    if (item.imgs) {
-      body += `<div class="spot-imgs">`;
-      item.imgs.forEach((im) => {
-        body += `<div class="spot-img-slot" data-src="${im.url}" data-cap="${im.cap}"></div>`;
-      });
-      body += `</div>`;
-    }
-
-    body += `</div></div>`;
+    if (item.food) { body+='<div class="food-opts">'; item.food.forEach(f=>{ if(f.mapUrl) body+=`<a class="food-opt" href="${f.mapUrl}" target="_blank">${f.label} 📍</a>`; else body+=`<span class="food-opt">${f.label||f}</span>`; }); body+='</div>'; }
+    if (item.places) { body+='<div class="places"><div class="places-lbl">📍 Spots</div><div class="chips">'; item.places.forEach(p=>{ if(p.mapUrl) body+=`<a class="chip" href="${p.mapUrl}" target="_blank">${p.label}</a>`; else body+=`<span class="chip">${p.label||p}</span>`; }); body+='</div></div>'; }
+    if (item.img) body+=`<div class="spot-img-slot" data-src="${item.img.url}" data-cap="${item.img.caption}"></div>`;
+    if (item.imgs) { body+='<div class="spot-imgs">'; item.imgs.forEach(im=>{ body+=`<div class="spot-img-slot" data-src="${im.url}" data-cap="${im.cap}"></div>`; }); body+='</div>'; }
+    body+=`</div></div>`;
   });
-  body += '</div>';
-
-  card.innerHTML = `
+  body+='</div>';
+  card.innerHTML=`
     <div class="day-header">
       <div class="day-date-box"><div class="dm">APR</div><div class="dn">${day.num}</div></div>
-      <div class="day-info">
-        <div class="day-title">${day.sub}</div>
-        <div class="day-sub">${day.desc}</div>
-      </div>
+      <div class="day-info"><div class="day-title">${day.sub}</div><div class="day-sub">${day.desc}</div></div>
       <div class="day-chev">▶</div>
     </div>
     <div class="day-body">
-      ${day.cover ? `<div class="day-cover-slot" data-src="${day.cover.url}" data-cap="${day.cover.caption}"></div>` : ''}
+      ${day.cover?`<div class="day-cover-slot" data-src="${day.cover.url}" data-cap="${day.cover.caption}"></div>`:''}
       ${body}
     </div>`;
-
-  // Replace cover slot
   const coverSlot = card.querySelector('.day-cover-slot');
   if (coverSlot) {
-    const src = coverSlot.dataset.src, cap = coverSlot.dataset.cap;
-    const img = lazyImg(src, 'day-cover', cap);
-    const wrap = document.createElement('div');
-    wrap.className = 'day-cover-wrap';
-    const label = document.createElement('div');
-    label.className = 'day-cover-label';
-    label.textContent = cap;
-    wrap.appendChild(img);
-    wrap.appendChild(label);
-    coverSlot.replaceWith(wrap);
+    const src=coverSlot.dataset.src, cap=coverSlot.dataset.cap;
+    const img=lazyImg(src,'day-cover',cap);
+    const wrap=document.createElement('div'); wrap.className='day-cover-wrap';
+    const label=document.createElement('div'); label.className='day-cover-label'; label.textContent=cap;
+    wrap.appendChild(img); wrap.appendChild(label); coverSlot.replaceWith(wrap);
   }
-
-  // Replace all spot-img-slots with real img elements
-  card.querySelectorAll('.spot-img-slot').forEach((slot) => {
-    const src = slot.dataset.src, cap = slot.dataset.cap;
-    slot.replaceWith(lazyImg(src, 'spot-img', cap));
-  });
-
-  card.querySelector('.day-header').addEventListener('click', () => {
-    const wasOpen = card.classList.contains('open');
+  card.querySelectorAll('.spot-img-slot').forEach(slot=>{ const src=slot.dataset.src,cap=slot.dataset.cap; slot.replaceWith(lazyImg(src,'spot-img',cap)); });
+  card.querySelector('.day-header').addEventListener('click', ()=>{
+    const wasOpen=card.classList.contains('open');
     card.classList.toggle('open');
     if (!wasOpen) {
-      // Load deferred images now that the card is visible.
-      // Set onerror + onload here, just before assigning src, so Safari's
-      // premature error-on-no-src behaviour never fires on these elements.
-      card.querySelectorAll('img[data-lazy-src]').forEach((img) => {
-        img.onload = () => img.classList.add('loaded');
-        img.onerror = () => { img.style.display = 'none'; };
-        img.src = img.dataset.lazySrc;
+      card.querySelectorAll('img[data-lazy-src]').forEach(img=>{
+        img.onload=()=>img.classList.add('loaded');
+        img.onerror=()=>{ img.style.display='none'; };
+        img.src=img.dataset.lazySrc;
         img.removeAttribute('data-lazy-src');
       });
-      if (day.yosDay) setTimeout(() => yosAnimate(mapId, day.yosDay), 120);
+      if (day.yosDay) setTimeout(()=>yosAnimate(mapId,day.yosDay),120);
     }
   });
-
   dayList.appendChild(card);
 });

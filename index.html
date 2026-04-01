@@ -201,76 +201,6 @@
         border-bottom-color: var(--rust);
       }
 
-      /* ── PASSWORD LOCK ── */
-      .password-lock {
-        position: fixed;
-        inset: 0;
-        background: var(--ink);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        transition:
-          opacity 0.5s ease,
-          visibility 0.5s ease;
-      }
-      .password-lock.unlocked {
-        opacity: 0;
-        visibility: hidden;
-      }
-      .password-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-        padding: 2rem;
-        max-width: 320px;
-      }
-      .password-title {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--cream);
-        text-align: center;
-      }
-      .password-subtitle {
-        font-size: 0.85rem;
-        color: var(--sand);
-        text-align: center;
-      }
-      .password-input-group {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-      }
-      .password-input {
-        width: 48px;
-        height: 52px;
-        font-size: 1.3rem;
-        font-weight: 700;
-        text-align: center;
-        border: 2px solid var(--sand);
-        background: transparent;
-        color: var(--cream);
-        border-radius: 4px;
-        font-family: 'DM Mono', monospace;
-        letter-spacing: 0.1em;
-        transition: border-color 0.2s ease;
-      }
-      .password-input:focus {
-        outline: none;
-        border-color: var(--rust);
-      }
-      .password-input::placeholder {
-        color: var(--muted);
-      }
-      .password-error {
-        color: #ff6b6b;
-        font-size: 0.8rem;
-        text-align: center;
-        min-height: 1.2rem;
-      }
-
       /* ── SECTIONS ── */
       .section {
         display: none;
@@ -999,6 +929,72 @@
         letter-spacing: 0.2em;
         color: var(--muted);
       }
+
+      /* ── PASSWORD LOCK ── */
+      .password-lock {
+        position: fixed;
+        inset: 0;
+        background: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition:
+          opacity 0.5s ease,
+          visibility 0.5s ease;
+      }
+      .password-lock.unlocked {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .password-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 320px;
+      }
+      .password-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--cream);
+        text-align: center;
+      }
+      .password-subtitle {
+        font-size: 0.85rem;
+        color: var(--sand);
+        text-align: center;
+      }
+      .password-input-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+      }
+      .password-input {
+        width: 48px;
+        height: 52px;
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-align: center;
+        border: 2px solid var(--sand);
+        background: transparent;
+        color: var(--cream);
+        border-radius: 4px;
+        font-family: 'DM Mono', monospace;
+        transition: border-color 0.2s;
+      }
+      .password-input:focus {
+        outline: none;
+        border-color: var(--rust);
+      }
+      .password-error {
+        color: #ff6b6b;
+        font-size: 0.8rem;
+        text-align: center;
+        min-height: 1.2rem;
+      }
     </style>
   </head>
   <body>
@@ -1007,11 +1003,10 @@
       <div class="password-container">
         <h2 class="password-title">Access Required</h2>
         <p class="password-subtitle">請輸入六位數密碼</p>
-        <div class="password-input-group" id="passwordInputGroup">
+        <div class="password-input-group">
           <input
             type="text"
             class="password-input"
-            id="pwd0"
             maxlength="1"
             placeholder="•"
             inputmode="numeric"
@@ -1019,7 +1014,6 @@
           <input
             type="text"
             class="password-input"
-            id="pwd1"
             maxlength="1"
             placeholder="•"
             inputmode="numeric"
@@ -1027,7 +1021,6 @@
           <input
             type="text"
             class="password-input"
-            id="pwd2"
             maxlength="1"
             placeholder="•"
             inputmode="numeric"
@@ -1035,7 +1028,6 @@
           <input
             type="text"
             class="password-input"
-            id="pwd3"
             maxlength="1"
             placeholder="•"
             inputmode="numeric"
@@ -1043,7 +1035,6 @@
           <input
             type="text"
             class="password-input"
-            id="pwd4"
             maxlength="1"
             placeholder="•"
             inputmode="numeric"
@@ -1051,7 +1042,6 @@
           <input
             type="text"
             class="password-input"
-            id="pwd5"
             maxlength="1"
             placeholder="•"
             inputmode="numeric"
@@ -1371,12 +1361,26 @@
           ><span class="ri-text">Groveland → Fresno → Los Angeles</span>
         </div>
         <div class="route-item">
-          <span class="ri-date">4/7–4/14</span><span class="ri-dot rust"></span
+          <span class="ri-date">4/7–4/10</span><span class="ri-dot rust"></span
           ><span class="ri-text">Los Angeles · Alhambra</span>
         </div>
         <div class="route-item">
-          <span class="ri-date">4/15</span><span class="ri-dot rust"></span
-          ><span class="ri-text">LA → SEA → SFO → TPE</span>
+          <span class="ri-date">4/11</span><span class="ri-dot rust"></span
+          ><span class="ri-text">LA → California 1 → Monterey</span>
+        </div>
+        <div class="route-item">
+          <span class="ri-date">4/12</span><span class="ri-dot rust"></span
+          ><span class="ri-text"
+            >Monterey → Avenue of the Giants → Grants Pass</span
+          >
+        </div>
+        <div class="route-item">
+          <span class="ri-date">4/13</span><span class="ri-dot rust"></span
+          ><span class="ri-text">Grants Pass → Portland → Seattle</span>
+        </div>
+        <div class="route-item">
+          <span class="ri-date">4/14–4/15</span><span class="ri-dot sky"></span
+          ><span class="ri-text">Seattle（姑姑安排）→ SEA → SFO → TPE</span>
         </div>
       </div>
     </div>
@@ -1407,8 +1411,7 @@
           ><span class="v">自排 · 7 座 · 5 件行李</span>
         </div>
         <div class="ir">
-          <span class="k">附加駕駛</span
-          ><span class="v">MuYun Weng（已包含）</span>
+          <span class="k">附加駕駛</span><span class="v">翁慕雲（已包含）</span>
         </div>
         <div class="ir">
           <span class="k">包含</span
@@ -1525,6 +1528,67 @@
           <span class="k">評分</span><span class="v">★ 4.91 · 159 則評價</span>
         </div>
       </div>
+
+      <div class="info-blk">
+        <div class="info-blk-title">
+          Monterey · Padre Oaks Inn · 4/11 – 4/12
+        </div>
+        <div class="ir">
+          <span class="k">地址</span
+          ><span class="v"
+            >1278 Munras Avenue, Monterey, CA 93940
+            <div class="link-row-inline">
+              <a
+                class="lnk lnk-map"
+                href="https://maps.google.com/?q=1278+Munras+Avenue+Monterey+CA"
+                target="_blank"
+                >📍 Google Maps</a
+              >
+            </div></span
+          >
+        </div>
+      </div>
+
+      <div class="info-blk">
+        <div class="info-blk-title">
+          Grants Pass · Riverside Inn · 4/12 – 4/13
+        </div>
+        <div class="ir">
+          <span class="k">地址</span
+          ><span class="v"
+            >986 SW 6th Street, Grants Pass, OR 97526
+            <div class="link-row-inline">
+              <a
+                class="lnk lnk-map"
+                href="https://maps.google.com/?q=986+SW+6th+Street+Grants+Pass+Oregon"
+                target="_blank"
+                >📍 Google Maps</a
+              >
+            </div></span
+          >
+        </div>
+      </div>
+
+      <div class="info-blk">
+        <div class="info-blk-title">Seattle Airbnb · 4/13 – 4/15</div>
+        <div class="ir">
+          <span class="k">地址</span
+          ><span class="v"
+            >6189 168th Place SW, Bellevue, WA 98006
+            <div class="link-row-inline">
+              <a
+                class="lnk lnk-map"
+                href="https://maps.google.com/?q=6189+168th+Place+SW+Bellevue+WA"
+                target="_blank"
+                >📍 Google Maps</a
+              >
+            </div></span
+          >
+        </div>
+        <div class="ir">
+          <span class="k">注意</span><span class="v">行程交給姑姑安排 🙏</span>
+        </div>
+      </div>
     </div>
 
     <!-- BUDGET -->
@@ -1555,8 +1619,16 @@
           <span class="bl">⚾ 棒球票</span><span class="ba">NT$ 21,362</span>
         </div>
         <div class="budget-row">
+          <span class="bl">🏨 Monterey · Padre Oaks Inn</span
+          ><span class="ba">NT$ 10,656</span>
+        </div>
+        <div class="budget-row">
+          <span class="bl">🏨 Grants Pass · Riverside Inn</span
+          ><span class="ba">NT$ 7,913</span>
+        </div>
+        <div class="budget-row">
           <span class="bl">🎡 Universal Studios</span
-          ><span class="ba">TBD</span>
+          ><span class="ba">NT$ 3,699</span>
         </div>
         <div class="budget-row">
           <span class="bl">🔬 CA Academy of Sciences NightLife</span
@@ -1575,7 +1647,7 @@
         </div>
         <div class="budget-row tot">
           <span class="bl">目前確認總計</span
-          ><span class="ba">NT$ 271,407+</span>
+          ><span class="ba">NT$ 293,675+</span>
         </div>
       </div>
     </div>

@@ -182,9 +182,9 @@ const days = [
     tl: [
       { t: '', dot: 'gray', n: '⚠️ 洛杉磯塞車時段', d: '上午 07:30–10:00，下午 03:00–07:30 請避開' },
       { t: '', dot: 'rust', n: 'Los Angeles County Museum of Art (LACMA)', d: '世界級藝術博物館', mapUrl: 'https://maps.google.com/?q=Los+Angeles+County+Museum+of+Art',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/LACMA_Chris_Burden_Urban_Light.jpg/600px-LACMA_Chris_Burden_Urban_Light.jpg', caption: 'LACMA · Urban Light' } },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/LACMA.JPG/600px-LACMA.JPG', caption: 'LACMA · Los Angeles' } },
       { t: '', dot: 'rust', n: 'Beverly Hills', d: '豪宅街道 · Rodeo Drive', mapUrl: 'https://maps.google.com/?q=Beverly+Hills+CA',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Beverly_Hills_Montage.jpg/600px-Beverly_Hills_Montage.jpg', caption: 'Beverly Hills' } },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Beverly_Hills-Los_Angeles-California4388.JPG/600px-Beverly_Hills-Los_Angeles-California4388.JPG', caption: 'Beverly Hills' } },
       { t: '', dot: 'gray', n: 'Lunch — Young Dong Tofu', tag: '餐飲', food: [{ label: 'Young Dong Tofu', mapUrl: 'https://maps.google.com/?q=Young+Dong+Tofu+Los+Angeles' }] },
       { t: '', dot: 'rust', n: 'Santa Monica', d: 'Beach Parking $15/次 · Parking Structure 6（室內 90 分免費）', mapUrl: 'https://maps.google.com/?q=Santa+Monica+Beach+CA',
         img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Santa_Monica_Pier_Sunset.jpg/600px-Santa_Monica_Pier_Sunset.jpg', caption: 'Santa Monica Pier' } },
@@ -199,7 +199,7 @@ const days = [
     sub: '洛杉磯 Day 2',
     desc: 'Universal Studios Hollywood · Griffith Observatory',
     cover: {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Griffith_Observatory_from_the_air.jpg/1200px-Griffith_Observatory_from_the_air.jpg',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Griffith_Observatory_on_the_south-facing_slope_of_Mount_Hollywood_in_L.A.%27s_Griffith_Park_%28LC-DIG-highsm-_22255%29.tif/lossy-page1-1200px-Griffith_Observatory_on_the_south-facing_slope_of_Mount_Hollywood_in_L.A.%27s_Griffith_Park_%28LC-DIG-highsm-_22255%29.tif.jpg',
       caption: 'Griffith Observatory · Los Angeles',
     },
     tl: [
@@ -209,7 +209,7 @@ const days = [
         img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Universal_Studios_Hollywood_%28aerial%29.jpg/600px-Universal_Studios_Hollywood_%28aerial%29.jpg', caption: 'Universal Studios Hollywood' } },
       { t: '', dot: 'sky', n: 'LA Alhambra Airbnb', d: '1126 South Cordova St', tag: '住宿', mapUrl: 'https://maps.google.com/?q=1126+South+Cordova+Street+Alhambra+CA' },
       { t: '', dot: 'rust', n: 'Griffith Observatory', d: '夜間洛杉磯夜景 · 免費入場', mapUrl: 'https://maps.google.com/?q=Griffith+Observatory+Los+Angeles',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Griffith_Observatory_from_the_air.jpg/600px-Griffith_Observatory_from_the_air.jpg', caption: 'Griffith Observatory' } },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Griffith_Observatory_on_the_south-facing_slope_of_Mount_Hollywood_in_L.A.%27s_Griffith_Park_%28LC-DIG-highsm-_22255%29.tif/lossy-page1-600px-Griffith_Observatory_on_the_south-facing_slope_of_Mount_Hollywood_in_L.A.%27s_Griffith_Park_%28LC-DIG-highsm-_22255%29.tif.jpg', caption: 'Griffith Observatory' } },
     ],
   },
 
@@ -249,7 +249,7 @@ const days = [
     tl: [
       { t: '', dot: 'sky', n: 'Alhambra Airbnb Check-out', tag: '住宿' },
       { t: '', dot: 'rust', n: 'Morro Bay T Pier', d: '沿海小鎮 · 海獺出沒', mapUrl: 'https://maps.google.com/?q=Morro+Bay+T+Pier+California',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Morro_Bay%2C_CA_9-04_%28209%29.jpg/600px-Morro_Bay%2C_CA_9-04_%28209%29.jpg', caption: 'Morro Bay' } },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Morro_Bay_City_1.jpg/600px-Morro_Bay_City_1.jpg', caption: 'Morro Bay' } },
       { t: '', dot: 'gray', n: 'Lunch', tag: '餐飲', food: [
         { label: "Rose's Bar and Grill", mapUrl: 'https://maps.google.com/?q=Rose+Bar+and+Grill+Morro+Bay' },
         { label: 'The Dutchie', mapUrl: 'https://maps.google.com/?q=The+Dutchie+Morro+Bay' },
@@ -303,7 +303,7 @@ const days = [
         img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Eugene_5th_Street_Market.jpg/600px-Eugene_5th_Street_Market.jpg', caption: '5th Street Public Market' } },
       { t: '', dot: 'rust', n: 'Portland', d: '約 1 小時 47 分鐘', mapUrl: 'https://maps.google.com/?q=Portland+Oregon' },
       { t: '', dot: 'rust', n: 'Voodoo Doughnut', d: '波特蘭必吃甜甜圈', mapUrl: 'https://maps.google.com/?q=Voodoo+Doughnut+Portland',
-        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Voodoo_Doughnut_-_Portland%2C_Oregon_%282014%29.jpg/600px-Voodoo_Doughnut_-_Portland%2C_Oregon_%282014%29.jpg', caption: 'Voodoo Doughnut' } },
+        img: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Voodoo_Doughnut_Portland%2C_Oregon_USA_03.JPG/600px-Voodoo_Doughnut_Portland%2C_Oregon_USA_03.JPG', caption: 'Voodoo Doughnut' } },
       { t: '', dot: 'rust', n: 'Portland Food Carts', d: '波特蘭特色美食車', mapUrl: 'https://maps.google.com/?q=Portland+Food+Carts', webUrl: 'https://www.travelportland.com/food-carts/pods/' },
       { t: '', dot: 'rust', n: 'Woodburn Premium Outlets', d: 'Oregon 免稅！購物 · 約 2 小時 50 分鐘路程', mapUrl: 'https://maps.google.com/?q=Woodburn+Premium+Outlets+Oregon' },
       { t: '', dot: 'sky', n: 'Seattle Airbnb Check-in', d: '6189 168th Place SW, Bellevue WA 98006', tag: '住宿', mapUrl: 'https://maps.google.com/?q=6189+168th+Place+SW+Bellevue+WA' },
